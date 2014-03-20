@@ -12,11 +12,13 @@ resolvers += "Uqbar repo snapshots" at "http://uqbar-wiki.org/mvn/snapshots"
 
 resolvers += "SWT repo" at "http://swt-maven.googlecode.com/git-history/master/"
 
+resolvers += "swt-repo" at "https://swt-repo.googlecode.com/svn/repo/"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
 libraryDependencies += "org.uqbar-project" % "arena-jface" % "3.3-SNAPSHOT"
 
-resolvers += "swt-repo" at "https://swt-repo.googlecode.com/svn/repo/"
+libraryDependencies += "joda-time" % "joda-time" % "2.3"
 
 libraryDependencies += {
   val os = (sys.props("os.name"), sys.props("os.arch")) match {
@@ -30,6 +32,5 @@ libraryDependencies += {
   val artifact = "org.eclipse.swt." + os
   "org.eclipse.swt" % artifact % "3.8"
 }
-
 
 transitiveClassifiers in Global := Seq(Artifact.SourceClassifier)
