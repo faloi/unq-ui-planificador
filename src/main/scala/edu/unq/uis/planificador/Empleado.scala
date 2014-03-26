@@ -8,7 +8,7 @@ class Empleado {
   def agregarRestriccion(restriccion: Restriccion) =
     this.restricciones = this.restricciones :+ restriccion
 
-  def agregarDisponibilidad(interval: RecurrentInterval): Unit =
+  def estaDisponibleLos(interval: RecurrentInterval): Unit =
     this.disponibilidades = this.disponibilidades + (interval.diaDeSemana -> interval)
 
   def estaDisponiblePara(time: Imports.DateTime): Boolean =
