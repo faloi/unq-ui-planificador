@@ -11,14 +11,14 @@ class EmpleadoSpec extends FlatSpec with ShouldMatchers {
     jorge.estaDisponiblePara(new DateTime("2004-12-13")) should be (false)
   }
 
-  it should "acepta un dia de disponibilidad" in {
+  it should "aceptar un dia de disponibilidad" in {
     val jorge = new Empleado
     jorge.agregarDisponibilidad(new RecurrentInterval(10, 18, DateTimeConstants.MONDAY))
     jorge.estaDisponiblePara(new DateTime("2014-03-24T09:00")) should be (false)
     jorge.estaDisponiblePara(new DateTime("2014-03-24T15:00")) should be (true)
   }
 
-  it should "acepta varias disponiblilidades" in {
+  it should "aceptar varias disponiblilidades" in {
     val jorge = new Empleado
     jorge.agregarDisponibilidad(new RecurrentInterval(10, 18, DateTimeConstants.THURSDAY))
     jorge.agregarDisponibilidad(new RecurrentInterval(10, 18, DateTimeConstants.MONDAY))
@@ -33,5 +33,13 @@ class EmpleadoSpec extends FlatSpec with ShouldMatchers {
     jorge.agregarRestriccion( new Restriccion(new DateTime("2014-03-24T11:00")))
 
     jorge.estaDisponiblePara(new DateTime("2014-03-24T11:00")) should be (false)
+  }
+
+  it should "pisar la disponibilidad anterior cuando se agrega otra para el mismo dia" in {
+    val jorge = new Empleado
+    jorge.agregarDisponibilidad(new RecurrentInterval(10, 18, DateTimeConstants.MONDAY))
+    jorge.agregarDisponibilidad(new RecurrentInterval(10, 13, DateTimeConstants.MONDAY))
+
+    jorge.estaDisponiblePara(new DateTime("2014-03-24T14:00")) should be (false)
   }
 }
