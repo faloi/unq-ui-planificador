@@ -20,6 +20,8 @@ libraryDependencies += "org.uqbar-project" % "arena-jface" % "3.3-SNAPSHOT"
 
 libraryDependencies += "joda-time" % "joda-time" % "2.3"
 
+libraryDependencies += "com.github.nscala-time" % "nscala-time_2.10" % "0.2.0"
+
 libraryDependencies += {
   val os = (sys.props("os.name"), sys.props("os.arch")) match {
     case ("Linux", _) => "gtk.linux.x86_64"
