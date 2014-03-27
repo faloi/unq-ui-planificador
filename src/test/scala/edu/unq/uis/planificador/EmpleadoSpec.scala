@@ -14,32 +14,35 @@ class EmpleadoSpec extends FlatSpec with ShouldMatchers with BeforeAndAfter {
   }
   
   "Un empleado " should "tener disponibilidad" in {
-    empleado.estaDisponiblePara(new DateTime("2004-12-13")) should not be true
+    empleado.puedeTrabajar(new DateTime("2004-12-13")) should be (false)
   }
 
   it should "aceptar un dia de disponibilidad" in {
-    empleado estaDisponibleLos (Lunes de 10 a 18)
-    empleado.estaDisponiblePara(new DateTime("2014-03-24T09:00")) should not be true
-    empleado.estaDisponiblePara(new DateTime("2014-03-24T15:00")) should not be false
+    empleado disponibleLos (Lunes de 10 a 18)
+    
+    empleado.puedeTrabajar(new DateTime("2014-03-24T09:00")) should be (false)
+    empleado.puedeTrabajar(new DateTime("2014-03-24T15:00")) should be (true)
   }
 
   it should "aceptar varias disponiblilidades" in {
-    empleado estaDisponibleLos (Jueves de 10 a 18)
-    empleado estaDisponibleLos (Lunes de 10 a 18)
+    empleado disponibleLos (Jueves de 10 a 18)
+    empleado disponibleLos (Lunes de 10 a 18)
 
-    empleado.estaDisponiblePara(new DateTime("2014-03-24T11:00")) should not be false
-    empleado.estaDisponiblePara(new DateTime("2014-03-27T15:00")) should not be false
+    empleado.puedeTrabajar(new DateTime("2014-03-24T11:00")) should be (true)
+    empleado.puedeTrabajar(new DateTime("2014-03-27T15:00")) should be (true)
   }
 
   it should "no estar disponible si hay una restriccion especifica para un dia normalmente habilitado" in {
-    empleado estaDisponibleLos (Lunes de 10 a 18)
-    empleado.agregarRestriccion( new Restriccion(new DateTime("2014-03-24T11:00")))
-    empleado.estaDisponiblePara(new DateTime("2014-03-24T11:00")) should not be true
+    empleado disponibleLos (Lunes de 10 a 18)
+    empleado.agregarRestriccion(new Restriccion(new DateTime("2014-03-24T11:00")))
+    
+    empleado.puedeTrabajar(new DateTime("2014-03-24T11:00")) should be (false)
   }
 
   it should "pisar la disponibilidad anterior cuando se agrega otra para el mismo dia" in {
-    empleado estaDisponibleLos (Lunes de 10 a 18)
-    empleado estaDisponibleLos (Lunes de 10 a 13)
-    empleado.estaDisponiblePara(new DateTime("2014-03-24T14:00")) should not be true
+    empleado disponibleLos (Lunes de 10 a 18)
+    empleado disponibleLos (Lunes de 10 a 13)
+    
+    empleado.puedeTrabajar(new DateTime("2014-03-24T14:00")) should be (false)
   }
 }
