@@ -1,11 +1,11 @@
-package edu.unq.uis.planificador
+package edu.unq.uis.planificador.builders
 
 import org.joda.time.DateTimeConstants
+import edu.unq.uis.planificador.RecurrentInterval
 
 class RecurrentIntervalBuilder(day : Int) {
   var inicio : Int = 0
   var fin : Int = 0
-
 
   def a( unFin : Int) : RecurrentInterval = {
     this.fin = unFin
@@ -16,12 +16,9 @@ class RecurrentIntervalBuilder(day : Int) {
     this.inicio = unInicio
     this
   }
-
-
 }
 
-object RecurrentIntervalBuilder{
-//  implicit def intToPartialInterval(d: Int) = new RecurrentInterval(d, 0, 0)
+object RecurrentIntervalBuilder {
   val Lunes : RecurrentIntervalBuilder = new RecurrentIntervalBuilder(DateTimeConstants.MONDAY)
   val Martes : RecurrentIntervalBuilder = new RecurrentIntervalBuilder(DateTimeConstants.TUESDAY)
   val Miercoles : RecurrentIntervalBuilder = new RecurrentIntervalBuilder(DateTimeConstants.WEDNESDAY)

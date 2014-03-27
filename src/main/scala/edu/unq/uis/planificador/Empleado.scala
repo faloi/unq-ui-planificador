@@ -1,8 +1,4 @@
 package edu.unq.uis.planificador
-import com.github.nscala_time.time.Imports
-import com.github.nscala_time.time.Imports._
-import org.joda.time.Instant
-import edu.unq.uis.planificador.timeHelpers.TimeInterval
 
 class Empleado {
   var disponibilidades : Map[Int, RecurrentInterval] = Map()
@@ -14,8 +10,7 @@ class Empleado {
   def disponibleLos(interval: RecurrentInterval) =
     this.disponibilidades = this.disponibilidades + (interval.diaDeSemana -> interval)
 
-  def puedeTrabajar(time: Imports.DateTime): Boolean = {
-    val turno = new Turno(time, TimeInterval.create(time, time + 1.hours))
+  def puedeTrabajar(turno: Turno): Boolean = {
     disponibilidades.values.exists { _.hayPara(turno)} && !restricciones.exists { _.hayPara(turno)}
   }
 }

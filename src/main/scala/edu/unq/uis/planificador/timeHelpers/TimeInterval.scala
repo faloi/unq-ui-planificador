@@ -8,6 +8,9 @@ import com.github.nscala_time.time.TypeImports.Interval
  * Created by faloi on 3/26/14.
  */
 object TimeInterval {
+  def create(inicio: Int, fin: Int): Interval =
+    new Interval(toLocalDateTime(inicio), toLocalDateTime(fin))
+
   def create(inicio : LocalTime, fin : LocalTime) : Interval =
     new Interval(toLocalDateTime(inicio), toLocalDateTime(fin))
 
@@ -16,4 +19,5 @@ object TimeInterval {
 
   private def toLocalDateTime(time : LocalTime) : DateTime = time.toDateTime(new Instant(0))
   private def toLocalDateTime(dateTime : DateTime) : DateTime = toLocalDateTime(dateTime.toLocalTime)
+  private def toLocalDateTime(hora : Int) : DateTime = toLocalDateTime(new LocalTime(hora, 0))
 }
