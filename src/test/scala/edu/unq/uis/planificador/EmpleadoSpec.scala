@@ -14,19 +14,12 @@ class EmpleadoSpec extends FlatSpec with ShouldMatchers with BeforeAndAfter {
   before {
     this.empleado = new Empleado
   }
-  
-  "Un empleado" should "tener disponibilidad" in {
+
+  "Un empleado" should "no tener disponibilidad por default" in {
     empleado.disponibilidadPara(Turno el "2004-12-13" de 9 a 18) should be (NoDisponible)
   }
 
-  it should "aceptar un dia de disponibilidad" in {
-    empleado disponibleLos (Lunes de 10 a 18)
-
-    empleado.disponibilidadPara(Turno el "2014-03-24" de 14 a 19) should be (NoDisponible)
-    empleado.disponibilidadPara(Turno el "2014-03-24" de 14 a 18) should be (Disponible)
-  }
-
-  it should "aceptar varias disponiblilidades" in {
+  it should "responder si esta disponible para un turno cuando tiene disponibilidades configuradas" in {
     empleado disponibleLos (Jueves de 10 a 18)
     empleado disponibleLos (Lunes de 10 a 18)
 
