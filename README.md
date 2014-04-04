@@ -3,7 +3,7 @@ unq-ui-planificador
 
 TPs de la materia Construcción de Interfases de Usuario - UNQ
 
-## Dominio
+### Dominio
 El problema que tenemos que resolver parece bastante simple, al final solo
 queremos saber: ¿Quién viene a trabajar mañana?
 Pero esto no es tan simple.
