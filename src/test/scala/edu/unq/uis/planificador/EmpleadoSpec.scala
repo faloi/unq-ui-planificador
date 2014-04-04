@@ -14,7 +14,7 @@ class EmpleadoSpec extends FlatSpec with ShouldMatchers with BeforeAndAfter {
     this.empleado = new Empleado
   }
   
-  "Un empleado " should "tener disponibilidad" in {
+  "Un empleado" should "tener disponibilidad" in {
     empleado.puedeTrabajar(Turno el "2004-12-13" de 9 a 18) should be (false)
   }
 

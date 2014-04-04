@@ -1,5 +1,7 @@
 package edu.unq.uis.planificador
 
+import edu.unq.uis.planificador.disponibilidad.{NoDisponible, ConRestriccion, Disponible, Disponibilidad}
+
 class Empleado {
   var disponibilidades : Map[Int, RecurrentInterval] = Map()
   var restricciones : Seq[Restriccion] = Seq.empty[Restriccion]
@@ -11,7 +13,19 @@ class Empleado {
     this.disponibilidades = this.disponibilidades + (interval.diaDeSemana -> interval)
 
   def puedeTrabajar(turno: Turno): Boolean = {
-    disponibilidades.values.exists { _.hayPara(turno)} && !restricciones.exists { _.hayPara(turno)}
+    disponibilidadPara(turno) match {
+      case Disponible => true
+      case _ => false
+    }
+  }
+
+  def disponibilidadPara(turno : Turno) : Disponibilidad = {
+    if (restricciones.exists { _.hayPara(turno)})
+      return ConRestriccion
+
+    if (disponibilidades.values.exists { _.hayPara(turno)})
+      Disponible
+    else
+      NoDisponible
   }
 }
-
