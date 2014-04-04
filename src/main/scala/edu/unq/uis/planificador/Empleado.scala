@@ -20,8 +20,10 @@ class Empleado {
   }
 
   def disponibilidadPara(turno : Turno) : Disponibilidad = {
-    if (restricciones.exists { _.hayPara(turno)})
-      return ConRestriccion
+    val restriccion = restricciones.find {
+      _.hayPara(turno)
+    }
+    if (restriccion.isDefined) return ConRestriccion(restriccion.get)
 
     if (disponibilidades.values.exists { _.hayPara(turno)})
       Disponible

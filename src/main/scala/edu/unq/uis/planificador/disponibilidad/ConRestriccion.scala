@@ -1,6 +1,10 @@
 package edu.unq.uis.planificador.disponibilidad
 
+import edu.unq.uis.planificador.Restriccion
+
 /**
  * Created by faloi on 4/4/14.
  */
-case object ConRestriccion extends Disponibilidad { val name = "No disponible debido a restriccion" }
+case class ConRestriccion(restriccion: Restriccion) extends Disponibilidad {
+  override val razon = restriccion.razon
+}
