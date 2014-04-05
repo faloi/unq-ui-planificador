@@ -1,6 +1,9 @@
 package edu.unq.uis.planificador.disponibilidad
 
 
-trait Disponibilidad {
-  def razon: String = ""
-}
+sealed trait Disponibilidad {def razon: String}
+
+case object Excepcion extends Disponibilidad    {val razon = "No trabaja este día"}
+case object Asignacion extends Disponibilidad   {val razon = "Ya tiene un turno asignado"}
+case object Disponible extends Disponibilidad   {val razon = "Disponible"}
+case object NoDisponible extends Disponibilidad {val razon = "No se encuentra disponible para este día y rango"}

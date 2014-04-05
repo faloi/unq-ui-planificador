@@ -1,16 +1,12 @@
 package edu.unq.uis.planificador
 
 import com.github.nscala_time.time.Imports._
-import edu.unq.uis.planificador.timeHelpers.DateTimeExtended
 import edu.unq.uis.planificador.builders.TurnoBuilder
+import edu.unq.uis.planificador.disponibilidad.UbicableEnDia
 
-/**
- * Created by faloi on 3/26/14.
- */
-case class Turno(dia : DateTime, horario : Interval) {
+case class Turno(dia : DateTime, horario : Interval) extends UbicableEnDia {
 }
 
 object Turno {
   def el(fecha : String) : TurnoBuilder = new TurnoBuilder(new DateTime(fecha))
 }
-

@@ -1,6 +1,5 @@
 package edu.unq.uis.planificador
 
-import edu.unq.uis.planificador.disponibilidad.{NoDisponible, ConRestriccion, Disponible, Disponibilidad}
 
 class Empleado {
   var disponibilidades : Map[Int, RecurrentInterval] = Map()
@@ -20,9 +19,8 @@ class Empleado {
   }
 
   def disponibilidadPara(turno : Turno) : Disponibilidad = {
-    val restriccion = restricciones.find {
-      _.hayPara(turno)
-    }
+    val restriccion = restricciones.find _ == turno
+
     if (restriccion.isDefined) return ConRestriccion(restriccion.get)
 
     if (disponibilidades.values.exists { _.hayPara(turno)})
