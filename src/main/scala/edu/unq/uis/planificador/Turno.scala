@@ -4,7 +4,7 @@ import com.github.nscala_time.time.Imports._
 import edu.unq.uis.planificador.builders.TurnoBuilder
 import edu.unq.uis.planificador.disponibilidad.UbicableEnDia
 
-case class Turno(dia : DateTime, horario : Interval) extends UbicableEnDia {
+case class Turno(fecha : DateTime, horario : Interval) extends UbicableEnDia {
 }
 
 object Turno {

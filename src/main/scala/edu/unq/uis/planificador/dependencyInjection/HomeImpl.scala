@@ -7,4 +7,5 @@ trait HomeImpl[T] extends Home[T]{
   val all : mutable.Buffer[T] = new ListBuffer[T]
   def findAll() : scala.collection.mutable.Seq[T] = all.clone()
   def save(objeto : T)  = this.all += objeto
+  def clear() = this.all.clear()
 }
