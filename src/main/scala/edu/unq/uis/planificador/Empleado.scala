@@ -39,6 +39,10 @@ case class Empleado(nombre: String = "Natalia", apellido: String = "Natalia", le
 
   //TODO: luego remover definitivamente el uso de RecurrentInterval en favor de RecurrentCalendarSpace
   def disponibleLos(interval: RecurrentInterval) = {
+    this.disponibilidades --= get(Disponible).filter({
+      case CalendarElement(Disponible, RecurrentCalendarSpace(_, _, interval.diaDeSemana)) => true
+      case _ => false
+    })
 
     this.disponibilidades += CalendarElement(Disponible, new RecurrentCalendarSpace(interval.inicio, interval.fin, interval.diaDeSemana))
   }
