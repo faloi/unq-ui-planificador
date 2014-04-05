@@ -1,6 +1,13 @@
 package edu.unq.uis.planificador
 
-case class Empleado(nombre: String = "Natalia", apellido : String = "Natalia") {
+import org.uqbar.commons.utils.Observable
+
+@Observable
+class Empleado {
+  var nombre: String = null
+  var apellido: String = null
+  var legajo: String = null
+
   var disponibilidades : Map[Int, RecurrentInterval] = Map()
   var restricciones : Seq[Restriccion] = Seq.empty[Restriccion]
 
