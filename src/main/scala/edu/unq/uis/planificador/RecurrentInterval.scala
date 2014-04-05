@@ -1,7 +1,5 @@
 package edu.unq.uis.planificador
 
-import com.github.nscala_time.time.Imports
-import org.joda.time.{Instant, LocalTime, Interval, DateTime}
 import edu.unq.uis.planificador.timeHelpers.TimeInterval
 
 case class RecurrentInterval(inicio: Int, fin: Int, diaDeSemana: Int) {
