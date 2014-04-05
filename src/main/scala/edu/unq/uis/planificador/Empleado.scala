@@ -1,6 +1,6 @@
 package edu.unq.uis.planificador
 
-class Empleado {
+case class Empleado(nombre: String = "Natalia", apellido : String = "Natalia") {
   var disponibilidades : Map[Int, RecurrentInterval] = Map()
   var restricciones : Seq[Restriccion] = Seq.empty[Restriccion]
 
