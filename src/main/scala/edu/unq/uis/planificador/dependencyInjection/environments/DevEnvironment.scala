@@ -1,7 +1,9 @@
 package edu.unq.uis.planificador.dependencyInjection.environments
 
-import edu.unq.uis.planificador.dependencyInjection.EmpleadosHomeComponentImpl
+import org.uqbar.commons.model.Home
+import edu.unq.uis.planificador.Empleado
+import edu.unq.uis.planificador.homes.EmpleadosCollectionBasedHome
 
-trait DevEnvironment extends EmpleadosHomeComponentImpl {
-  override val empleadoHome: EmpleadosHome = new EmpleadosHome
+trait DevEnvironment {
+  val empleadoHome: Home[Empleado] = EmpleadosCollectionBasedHome
 }
