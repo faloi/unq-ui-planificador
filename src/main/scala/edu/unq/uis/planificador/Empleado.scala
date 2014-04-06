@@ -4,13 +4,9 @@ import org.uqbar.commons.utils.Observable
 import org.uqbar.commons.model.Entity
 
 @Observable
-class Empleado extends Entity {
-  var nombre: String = null
-  var apellido: String = null
-  var legajo: String = null
-
-  var disponibilidades : Map[Int, RecurrentInterval] = Map()
-  var restricciones : Seq[Restriccion] = Seq.empty[Restriccion]
+class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
+  var disponibilidades: Map[Int, RecurrentInterval] = Map()
+  var restricciones: Seq[Restriccion] = Seq.empty[Restriccion]
 
   def agregarRestriccion(restriccion: Restriccion) =
     this.restricciones = this.restricciones :+ restriccion
@@ -19,7 +15,11 @@ class Empleado extends Entity {
     this.disponibilidades = this.disponibilidades + (interval.diaDeSemana -> interval)
 
   def puedeTrabajar(turno: Turno): Boolean = {
-    disponibilidades.values.exists { _.hayPara(turno)} && !restricciones.exists { _.hayPara(turno)}
+    disponibilidades.values.exists {
+      _.hayPara(turno)
+    } && !restricciones.exists {
+      _.hayPara(turno)
+    }
   }
 }
 
