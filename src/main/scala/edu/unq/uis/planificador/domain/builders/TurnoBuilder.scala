@@ -1,8 +1,8 @@
-package edu.unq.uis.planificador.builders
+package edu.unq.uis.planificador.domain.builders
 
 import org.joda.time.DateTime
-import edu.unq.uis.planificador.Turno
-import edu.unq.uis.planificador.timeHelpers.TimeInterval
+import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
+import edu.unq.uis.planificador.domain.disponibilidad.Turno
 
 /**
  * Created by faloi on 3/26/14.

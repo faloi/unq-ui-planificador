@@ -1,6 +1,6 @@
-package edu.unq.uis.planificador.calendar
+package edu.unq.uis.planificador.domain.calendar
 
-import edu.unq.uis.planificador.disponibilidad.{NoDisponible, UbicableEnDia, Disponibilidad}
+import edu.unq.uis.planificador.domain.disponibilidad.{NoDisponible, UbicableEnDia, Disponibilidad}
 import scala.collection.mutable.ListBuffer
 
 case class CalendarElement(disponibilidad: Disponibilidad, calendarSpace: UbicableEnDia with ConRangoHorario){

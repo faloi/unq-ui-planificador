@@ -1,14 +1,17 @@
-package edu.unq.uis.planificador
+package edu.unq.uis.planificador.domain
 
-import edu.unq.uis.planificador.disponibilidad._
+import edu.unq.uis.planificador.domain.disponibilidad._
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
-import edu.unq.uis.planificador.calendar.{CalendarSpace, AllDayCalendarSpace, RecurrentCalendarSpace, CalendarElement}
+import edu.unq.uis.planificador.domain.calendar._
 import com.github.nscala_time.time.Imports._
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.utils.Observable
-import edu.unq.uis.planificador.patterns.Chain
+import edu.unq.uis.planificador.domain.patterns.Chain
 import Chain._
+import edu.unq.uis.planificador.domain.calendar.CalendarSpace
+import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
+import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {

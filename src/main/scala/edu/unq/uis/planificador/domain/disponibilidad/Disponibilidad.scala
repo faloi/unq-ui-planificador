@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.disponibilidad
+package edu.unq.uis.planificador.domain.disponibilidad
 
 
 sealed trait Disponibilidad {def razon: String}

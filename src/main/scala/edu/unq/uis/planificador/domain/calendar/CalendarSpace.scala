@@ -1,9 +1,9 @@
-package edu.unq.uis.planificador.calendar
+package edu.unq.uis.planificador.domain.calendar
 
-import edu.unq.uis.planificador.disponibilidad.UbicableEnDia
+import edu.unq.uis.planificador.domain.disponibilidad.UbicableEnDia
 import com.github.nscala_time.time.TypeImports.DateTime
 import com.github.nscala_time.time.TypeImports.Interval
-import edu.unq.uis.planificador.timeHelpers.TimeInterval
+import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
 import com.github.nscala_time.time.Imports
 
 case class CalendarSpace(fecha : DateTime, rango : Interval) extends UbicableEnDia with ConRangoHorario

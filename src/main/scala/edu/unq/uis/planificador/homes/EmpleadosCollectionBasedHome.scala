@@ -1,7 +1,7 @@
 package edu.unq.uis.planificador.homes
 
 import org.uqbar.commons.model.CollectionBasedHome
-import edu.unq.uis.planificador.Empleado
+import edu.unq.uis.planificador.domain.Empleado
 
 object EmpleadosCollectionBasedHome extends CollectionBasedHome[Empleado] {
   create(new Empleado("Pedro", "Picapiedras", "123134"))

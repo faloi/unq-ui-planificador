@@ -2,9 +2,9 @@ package edu.unq.uis.planificador.applicationModel
 
 import org.uqbar.commons.utils.Observable
 import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
-import edu.unq.uis.planificador.Empleado
 import java.util
 import scala.collection.JavaConversions.asScalaBuffer
+import edu.unq.uis.planificador.domain.Empleado
 
 @Observable
 class BuscadorEmpleados extends DevEnvironment {

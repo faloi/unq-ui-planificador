@@ -1,14 +1,11 @@
 package edu.unq.uis.planificador.ui
 
 import org.uqbar.arena.windows.{Dialog, WindowOwner, SimpleWindow}
-import edu.unq.uis.planificador.Empleado
 import org.uqbar.arena.widgets.{Button, Panel}
 import org.uqbar.arena.widgets.tables.{Column, Table}
-import org.uqbar.commons.utils.Observable
-import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
-import java.util
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
+import edu.unq.uis.planificador.domain.Empleado
 
 
 class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorEmpleados](parent, new BuscadorEmpleados) {

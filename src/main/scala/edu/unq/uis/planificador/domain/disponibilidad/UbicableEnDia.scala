@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.disponibilidad
+package edu.unq.uis.planificador.domain.disponibilidad
 
 import com.github.nscala_time.time.Imports._
 

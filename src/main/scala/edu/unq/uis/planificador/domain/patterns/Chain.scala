@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.patterns
+package edu.unq.uis.planificador.domain.patterns
 
 class Chain[A, B](f: A => Either[A, B]) {
   def +>(next: => (A => Either[A, B])): A => Either[A, B] =
