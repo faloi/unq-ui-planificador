@@ -3,7 +3,9 @@ package edu.unq.uis.planificador.ui
 import org.uqbar.arena.windows.WindowOwner
 import edu.unq.uis.planificador.domain.Empleado
 
-class CrearEmpleadoWindow(owner: WindowOwner) extends EditarEmpleadoWindow(owner, new Empleado) {
+class CrearEmpleadoDialog(owner: WindowOwner) extends EditarEmpleadoDialog(owner, new Empleado) {
+  override val title = "Nuevo empleado"
+
   override def executeTask() {
     empleadoHome.create(this.getModelObject)
     super.executeTask()

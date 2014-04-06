@@ -7,7 +7,7 @@ import org.uqbar.arena.layout.{ColumnLayout, VerticalLayout}
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.domain.Empleado
 
-class EditarEmpleadoWindow(owner: WindowOwner, model: Empleado) extends Dialog[Empleado](owner, model) with DevEnvironment {
+class EditarEmpleadoDialog(owner: WindowOwner, model: Empleado) extends Dialog[Empleado](owner, model) with DevEnvironment {
   override def addActions(actionsPanel: Panel) {
     new Button(actionsPanel)
       .setCaption("Guardar")
@@ -19,8 +19,10 @@ class EditarEmpleadoWindow(owner: WindowOwner, model: Empleado) extends Dialog[E
       .onClick(new Function(() => this.cancel))
   }
 
+  def title = "Editando " + getModelObject.nombreCompleto
+
   override def createFormPanel(mainPanel: Panel) {
-    this.setTitle("Nuevo empleado")
+    setTitle(title)
     mainPanel.setLayout(new VerticalLayout)
 
     createTextBoxWithLabel(mainPanel, "Nombre", "nombre")

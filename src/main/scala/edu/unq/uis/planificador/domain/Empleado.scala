@@ -16,6 +16,7 @@ import edu.unq.uis.planificador.exceptions.UnexpectedBusinessException
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
+  def nombreCompleto = s"$nombre $apellido"
 
   val estados: DisponibilidadContainer = new DisponibilidadContainer
 
