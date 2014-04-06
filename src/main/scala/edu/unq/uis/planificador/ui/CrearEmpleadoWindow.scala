@@ -1,11 +1,11 @@
 package edu.unq.uis.planificador.ui
 
-import edu.unq.uis.planificador.dependencyInjection.environments.DevEnvironment
 import edu.unq.uis.planificador.Empleado
 import org.uqbar.arena.layout._
 import org.uqbar.arena.widgets.{Button, TextBox, Label, Panel}
 import org.uqbar.arena.windows.{Dialog, WindowOwner}
 import org.uqbar.arena.aop.potm.Function
+import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
 
 class CrearEmpleadoWindow(owner: WindowOwner) extends Dialog[Empleado](owner, new Empleado()) with DevEnvironment {
   override def addActions(actionsPanel: Panel) {

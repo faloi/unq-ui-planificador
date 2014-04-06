@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.dependencyInjection.environments
+package edu.unq.uis.planificador.dependencyInjection
 
 import org.uqbar.commons.model.Home
 import edu.unq.uis.planificador.Empleado

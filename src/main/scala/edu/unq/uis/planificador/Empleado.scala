@@ -1,9 +1,10 @@
 package edu.unq.uis.planificador
 
 import org.uqbar.commons.utils.Observable
+import org.uqbar.commons.model.Entity
 
 @Observable
-class Empleado {
+class Empleado extends Entity {
   var nombre: String = null
   var apellido: String = null
   var legajo: String = null
