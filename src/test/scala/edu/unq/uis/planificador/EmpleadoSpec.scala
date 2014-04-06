@@ -1,12 +1,10 @@
 package edu.unq.uis.planificador
 
-import org.scalatest._
-import org.scalatest.matchers.ShouldMatchers
 import com.github.nscala_time.time.Imports._
 import edu.unq.uis.planificador.builders.RecurrentIntervalBuilder
 import RecurrentIntervalBuilder._
 
-class EmpleadoSpec extends FlatSpec with ShouldMatchers with BeforeAndAfter {
+class EmpleadoSpec extends BaseSpec {
 
   var empleado = new Empleado
   

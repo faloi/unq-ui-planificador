@@ -3,21 +3,13 @@ package edu.unq.uis.planificador.ui
 import org.uqbar.arena.windows.{Dialog, WindowOwner, SimpleWindow}
 import edu.unq.uis.planificador.Empleado
 import org.uqbar.arena.widgets.{Button, Panel}
-import org.uqbar.arena.aop.potm.Function
 import org.uqbar.arena.widgets.tables.{Column, Table}
 import org.uqbar.commons.utils.Observable
 import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
 import java.util
+import org.uqbar.arena.aop.potm.Function
+import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
 
-@Observable
-class BuscadorEmpleados extends DevEnvironment {
-  var empleados: java.util.List[Empleado] = _
-
-  def search {
-    empleados = new util.ArrayList[Empleado]
-    empleados = empleadoHome.allInstances()
-  }
-}
 
 class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorEmpleados](parent, new BuscadorEmpleados) {
   getModelObject.search
@@ -37,6 +29,8 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   def createResultsGrid(panel: Panel) {
     val table = new Table[Empleado](panel, classOf[Empleado])
     table.bindItemsToProperty("empleados")
+    table.bindSelectionToProperty("empleadoSeleccionado")
+    table.setHeigth(250)
 
     this.describeResultsGrid(table)
   }
