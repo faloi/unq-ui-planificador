@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.ui
+package edu.unq.uis.planificador.ui.empleado
 
 import org.uqbar.arena.windows.WindowOwner
 import edu.unq.uis.planificador.domain.Empleado
