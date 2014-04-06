@@ -7,10 +7,11 @@ import edu.unq.uis.planificador.calendar.{CalendarSpace, AllDayCalendarSpace, Re
 import com.github.nscala_time.time.Imports._
 import org.uqbar.commons.model.Entity
 import org.uqbar.commons.utils.Observable
+import edu.unq.uis.planificador.patterns.Chain
+import Chain._
 
 @Observable
-case class Empleado(var nombre: String = "Natalia", var apellido: String = "Natalia", var legajo: String = "0")  extends Entity {
-  import Chain._
+class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
 
   val disponibilidades: mutable.Buffer[CalendarElement] = new ListBuffer[CalendarElement]
 

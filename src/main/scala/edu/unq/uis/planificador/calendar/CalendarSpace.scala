@@ -8,17 +8,14 @@ import com.github.nscala_time.time.Imports
 
 case class CalendarSpace(fecha : DateTime, rango : Interval) extends UbicableEnDia with ConRangoHorario
 
-trait FullRango extends ConRangoHorario{
+trait FullRango extends ConRangoHorario {
   def rango: Interval = null
   override def contains(i : Interval) = true
 }
 
-case class AllDayCalendarSpace(fecha : DateTime) extends UbicableEnDia with ConRangoHorario {
-  def rango: Interval = null
-  override def contains(i : Interval) = true
-}
+case class AllDayCalendarSpace(fecha: DateTime) extends UbicableEnDia with FullRango
 
-object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with FullRango{
+object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with FullRango {
   override def esDia(dia : DateTime): Boolean = true
   override def fecha: DateTime = null
 }
