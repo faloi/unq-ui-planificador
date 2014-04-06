@@ -19,6 +19,10 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
       .setCaption("Nuevo")
       .onClick(new Function(() => this.openDialog(new CrearEmpleadoWindow(this))))
       .setAsDefault
+
+    new Button(actionsPanel)
+      .setCaption("Editar")
+      .onClick(new Function(() => this.openDialog(new EditarEmpleadoWindow(this, this.getModelObject.empleadoSeleccionado))))
   }
 
   override def createFormPanel(mainPanel: Panel): Unit = {
