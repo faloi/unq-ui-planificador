@@ -1,8 +1,8 @@
 package edu.unq.uis.planificador.domain
 
 import com.github.nscala_time.time.Imports._
-import edu.unq.uis.planificador.domain.builders.RecurrentIntervalBuilder
-import RecurrentIntervalBuilder._
+import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder
+import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
 
@@ -28,7 +28,7 @@ class EmpleadoSpec extends BaseSpec {
 
   it should "no estar disponible si hay una restriccion especifica para un dia normalmente habilitado" in {
     empleado disponibleLos (Lunes de 10 a 18)
-    empleado restriccionEl new DateTime("2014-03-24")
+    empleado restriccionEl "2014-03-24"
 
     empleado isDisponibleLos (Turno el "2014-03-24" de 11 a 13) should be(Restriccion)
   }
