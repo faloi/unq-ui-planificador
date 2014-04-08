@@ -1,4 +1,6 @@
 package edu.unq.uis.planificador.applicationModel
 
-case class DisponibilidadHoraria(dia: String, desde: Int, hasta: Int) {
-}
+import org.uqbar.commons.utils.Observable
+
+@Observable
+case class DisponibilidadHoraria(dia: String, inicio: Int, fin: Int)

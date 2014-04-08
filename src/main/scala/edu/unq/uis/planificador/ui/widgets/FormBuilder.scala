@@ -10,11 +10,15 @@ trait FormBuilder {
 
   def setTitle(title: String): Any
 
+  def addAdditionalContent(mainPanel: Panel) = {}
+
   def createFormPanel(mainPanel: Panel) {
     setTitle(title)
     mainPanel.setLayout(new VerticalLayout)
 
     fields.foreach(createField(mainPanel, _))
+
+    addAdditionalContent(mainPanel)
   }
 
   def createField(panel: Panel, labelAndProperty: (String, String)) = {
