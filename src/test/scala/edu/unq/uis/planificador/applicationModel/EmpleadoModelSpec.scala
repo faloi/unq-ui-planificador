@@ -1,10 +1,10 @@
 package edu.unq.uis.planificador.applicationModel
 
 import edu.unq.uis.planificador.BaseSpec
-import edu.unq.uis.planificador.domain.Empleado
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
-import edu.unq.uis.planificador.applicationModel.Converters._
 import collection.JavaConversions._
+import edu.unq.uis.planificador.domain.Empleado
+import edu.unq.uis.planificador.applicationModel.Converters._
 
 class EmpleadoModelSpec extends BaseSpec {
   var empleado: Empleado = null
@@ -19,5 +19,12 @@ class EmpleadoModelSpec extends BaseSpec {
 
     val expected = Seq(new DisponibilidadHoraria("Lunes", 15, 19), new DisponibilidadHoraria("Jueves", 16, 21))
     empleado.disponibilidades should be(expected: java.util.List[DisponibilidadHoraria])
+  }
+
+  it should "saber su nombre completo" in {
+    empleado.nombre = "Juan Carlos"
+    empleado.apellido = "Jimenez"
+
+    empleado.nombreCompleto should be("Juan Carlos Jimenez")
   }
 }

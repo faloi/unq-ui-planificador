@@ -15,7 +15,9 @@ object Converters {
       }
     }
 
-    def toDayOfWeek(it: Int) = {
+    def nombreCompleto = s"${self.nombre} ${self.apellido}"
+
+    private def toDayOfWeek(it: Int) = {
       it match {
         case DateTimeConstants.MONDAY => "Lunes"
         case DateTimeConstants.TUESDAY => "Martes"

@@ -1,8 +1,6 @@
 package edu.unq.uis.planificador.domain
 
 import edu.unq.uis.planificador.domain.disponibilidad._
-import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import edu.unq.uis.planificador.domain.calendar._
 import com.github.nscala_time.time.Imports._
 import org.uqbar.commons.model.Entity
@@ -16,8 +14,6 @@ import edu.unq.uis.planificador.exceptions.UnexpectedBusinessException
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
-  def nombreCompleto = s"$nombre $apellido"
-
   val estados: DisponibilidadContainer = new DisponibilidadContainer
 
   val chain =
@@ -28,8 +24,8 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
           case x: Seq[CalendarElement] => Right(x.head)
         }
 
-  def jerarquiaDeDisponibilidades = 
-    chain (estados de Restriccion) +> chain (estados de Asignacion) +> chain (estados de Disponible) +> chain (estados de NoDisponible)
+  def jerarquiaDeDisponibilidades =
+    chain(estados de Restriccion) +> chain(estados de Asignacion) +> chain(estados de Disponible) +> chain(estados de NoDisponible)
 
 
   def disponibilidadPara(turno: Turno): CalendarElement = jerarquiaDeDisponibilidades(turno) match {
