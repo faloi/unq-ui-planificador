@@ -27,4 +27,16 @@ class EmpleadoModelSpec extends BaseSpec {
 
     empleado.nombreCompleto should be("Juan Carlos Jimenez")
   }
+
+  it should "saber sus dias para los cuales esta disponible normalmente, en orden semanal" in {
+    empleado disponibleLos (Jueves de 16 a 21)
+    empleado disponibleLos (Lunes de 15 a 19)
+    empleado disponibleLos (Viernes de 16 a 21)
+
+    empleado.diasDisponible should be("Lu, Ju, Vi")
+  }
+
+  it should "devolver un string vacio para los dias cuando no tiene disponibilidades" in {
+    empleado.diasDisponible should be("")
+  }
 }

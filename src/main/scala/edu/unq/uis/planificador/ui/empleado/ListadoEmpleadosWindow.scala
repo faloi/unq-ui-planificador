@@ -5,7 +5,7 @@ import org.uqbar.arena.widgets.{Button, Panel}
 import org.uqbar.arena.widgets.tables.{Column, Table}
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
-import edu.unq.uis.planificador.domain.Empleado
+import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
 
 
 class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorEmpleados](parent, new BuscadorEmpleados) {
@@ -28,7 +28,7 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   }
 
   def createResultsGrid(panel: Panel) {
-    val table = new Table[Empleado](panel, classOf[Empleado])
+    val table = new Table[EmpleadoModel](panel, classOf[EmpleadoModel])
     table.bindItemsToProperty("empleados")
     table.bindSelectionToProperty("empleadoSeleccionado")
     table.setHeigth(250)
@@ -36,21 +36,26 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
     this.describeResultsGrid(table)
   }
 
-  def describeResultsGrid(table: Table[Empleado]) {
-    new Column[Empleado](table)
+  def describeResultsGrid(table: Table[EmpleadoModel]) {
+    new Column[EmpleadoModel](table)
       .setTitle("Nombre")
       .setFixedSize(150)
       .bindContentsToProperty("nombre")
 
-    new Column[Empleado](table)
+    new Column[EmpleadoModel](table)
       .setTitle("Apellido")
       .setFixedSize(150)
       .bindContentsToProperty("apellido")
 
-    new Column[Empleado](table)
+    new Column[EmpleadoModel](table)
       .setTitle("Legajo")
       .setFixedSize(100)
       .bindContentsToProperty("legajo")
+
+    new Column[EmpleadoModel](table)
+      .setTitle("Dias disponible")
+      .setFixedSize(200)
+      .bindContentsToProperty("diasDisponible")
   }
 
   private def openDialog(dialog: Dialog[_]) {

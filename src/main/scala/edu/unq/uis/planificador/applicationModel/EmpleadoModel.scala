@@ -11,10 +11,15 @@ object Converters {
 
   @Observable
   implicit class EmpleadoModel(val self: Empleado) {
-    def disponibilidades: java.util.List[DisponibilidadHoraria] = ((self estados) de Disponible).map {
-      it => it.calendarSpace match {
-        case RecurrentCalendarSpace(inicio, fin, diaDeSemana) => new DisponibilidadHoraria(toDayOfWeek(diaDeSemana), inicio, fin)
+    def disponibilidades: java.util.List[DisponibilidadHoraria] = ((self estados) de Disponible)
+      .map {
+      element => element.calendarSpace match {
+        case calendar@RecurrentCalendarSpace(_, _, _) => calendar
       }
+    }
+      .sortBy(_.diaDeSemana)
+      .map {
+      calendarSpace => new DisponibilidadHoraria(toDayOfWeek(calendarSpace.diaDeSemana), calendarSpace.inicio, calendarSpace.fin)
     }
 
     def nombre = self.nombre
@@ -24,6 +29,10 @@ object Converters {
     def legajo = self.legajo
 
     def nombreCompleto = s"${self.nombre} ${self.apellido}"
+
+    def diasDisponible = disponibilidades
+      .map(_.dia.substring(0, 2))
+      .mkString(", ")
 
     private def toDayOfWeek(it: Int) = {
       it match {
