@@ -35,4 +35,8 @@ class DisponibilidadContainer {
       disponibilidades += ((Disponible, Right(space.diaDeSemana)) -> CalendarElement(Disponible, space))
     case e: CalendarElement => disponibilidades += ((e.disponibilidad, Left(e.calendarSpace.fecha)) -> e)
   }
+
+  def ++=(calendarElements: Iterable[CalendarElement]) = calendarElements.foreach {
+    it => this += it
+  }
 }

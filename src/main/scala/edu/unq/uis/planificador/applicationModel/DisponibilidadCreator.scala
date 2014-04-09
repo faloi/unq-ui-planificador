@@ -14,5 +14,5 @@ class DisponibilidadCreator(empleado: Empleado) {
     empleado.disponibleLos(entity)
   }
 
-  def diasSeleccionables: java.util.List[DiaDeSemana] = DiaDeSemana.todos
+  def diasSeleccionables: java.util.List[DiaDeSemana] = DiaDeSemana.todos.diff(empleado.disponibilidades.map(_.diaDeSemana))
 }

@@ -35,8 +35,10 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
 
-  def disponibleLos(interval: RecurrentCalendarSpace) = {
-    estados += CalendarElement(Disponible, interval)
+  def disponibleLos(intervals: RecurrentCalendarSpace*) = {
+    estados ++= intervals.map {
+      it => CalendarElement(Disponible, it)
+    }
     ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
   }
 

@@ -47,7 +47,7 @@ class EditarEmpleadoDialog(owner: WindowOwner, model: Empleado) extends Dialog[E
 
   def createDisponibilidadTable(disponibilidadesPanel: Panel) {
     val SMALL_COLUMN = 55
-    val LARGE_COLUMN = 70
+    val LARGE_COLUMN = 80
 
     val table = new Table[RecurrentCalendarSpace](disponibilidadesPanel, classOf[RecurrentCalendarSpace])
     table.bindItemsToProperty("disponibilidades")
