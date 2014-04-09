@@ -7,15 +7,11 @@ import scala.collection.JavaConversions._
 
 @Observable
 class DisponibilidadCreator(empleado: EmpleadoModel) {
-  var desde: Int = _
-  var hasta: Int = _
-  var diaDeSemana: DiaDeSemana = _
+  var entity = new RecurrentCalendarSpace()
 
   def agregarDisponibilidad = {
-    val interval = new RecurrentCalendarSpace(desde, hasta, diaDeSemana)
-    interval.validar()
-
-    empleado.self.disponibleLos(interval)
+    entity.validar()
+    empleado.self.disponibleLos(entity)
   }
 
   def diasSeleccionables: java.util.List[DiaDeSemana] = DiaDeSemana.todos

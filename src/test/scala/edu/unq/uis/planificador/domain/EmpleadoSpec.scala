@@ -1,10 +1,10 @@
 package edu.unq.uis.planificador.domain
 
-import com.github.nscala_time.time.Imports._
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder
 import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
+import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
 
 class EmpleadoSpec extends BaseSpec {
 

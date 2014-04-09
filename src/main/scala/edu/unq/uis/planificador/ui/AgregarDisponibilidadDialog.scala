@@ -15,8 +15,8 @@ class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: EmpleadoModel)
   val title = "Agregar disponibilidad"
 
   val fields = Map(
-    "Desde" -> "desde",
-    "Hasta" -> "hasta"
+    "Desde" -> "entity.inicio",
+    "Hasta" -> "entity.fin"
   )
 
   onAccept(() => this.getModelObject.agregarDisponibilidad)
@@ -25,7 +25,7 @@ class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: EmpleadoModel)
     val selector = new Selector[DiaDeSemana](mainPanel)
     selector
       .allowNull(false)
-      .bindValueToProperty("diaDeSemana")
+      .bindValueToProperty("entity.diaDeSemana")
 
     selector
       .bindItems(new ObservableProperty("diasSeleccionables"))

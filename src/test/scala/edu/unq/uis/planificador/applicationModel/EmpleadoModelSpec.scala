@@ -5,6 +5,8 @@ import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
 import collection.JavaConversions._
 import edu.unq.uis.planificador.domain.Empleado
 import edu.unq.uis.planificador.applicationModel.Converters._
+import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
+import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
 
 class EmpleadoModelSpec extends BaseSpec {
   var empleado: Empleado = null
@@ -13,12 +15,12 @@ class EmpleadoModelSpec extends BaseSpec {
     empleado = new Empleado
   }
 
-  "An empleado model" should "return una coleccion de disponiblidades" in {
+  "An empleado model" should "return una coleccion de disponibilidades" in {
     empleado disponibleLos (Lunes de 15 a 19)
     empleado disponibleLos (Jueves de 16 a 21)
 
-    val expected = Seq(new DisponibilidadHoraria("Lunes", 15, 19), new DisponibilidadHoraria("Jueves", 16, 21))
-    empleado.disponibilidades should be(expected: java.util.List[DisponibilidadHoraria])
+    val expected = Seq(Lunes de 15 a 19, Jueves de 16 a 21)
+    empleado.disponibilidades should be(expected: java.util.List[RecurrentCalendarSpace])
   }
 
   it should "saber su nombre completo" in {

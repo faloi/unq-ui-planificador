@@ -3,6 +3,7 @@ package edu.unq.uis.planificador.domain.calendar
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
 import org.uqbar.commons.model.UserException
+import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
 
 class RecurrentCalendarSpaceSpec extends BaseSpec {
 

@@ -1,9 +1,8 @@
 package edu.unq.uis.planificador.domain.builders
 
-import org.joda.time.DateTimeConstants
-import edu.unq.uis.planificador.domain.calendar.{RecurrentCalendarSpace, RecurrentInterval}
+import edu.unq.uis.planificador.domain.calendar.{RecurrentCalendarSpace, DiaDeSemana}
 
-case class RecurrentCalendarSpaceBuilder(day: Int) {
+case class RecurrentCalendarSpaceBuilder(day: DiaDeSemana) {
   var inicio: Int = 0
   var fin: Int = 0
 
@@ -19,11 +18,5 @@ case class RecurrentCalendarSpaceBuilder(day: Int) {
 }
 
 object RecurrentCalendarSpaceBuilder {
-  val Lunes: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.MONDAY)
-  val Martes: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.TUESDAY)
-  val Miercoles: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.WEDNESDAY)
-  val Jueves: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.THURSDAY)
-  val Viernes: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.FRIDAY)
-  val Sabado: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.SATURDAY)
-  val Domingo: RecurrentCalendarSpaceBuilder = RecurrentCalendarSpaceBuilder(DateTimeConstants.SUNDAY)
+  implicit def diaDeSemanaToBuilder(dia: DiaDeSemana) = new RecurrentCalendarSpaceBuilder(dia)
 }

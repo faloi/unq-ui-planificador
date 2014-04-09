@@ -14,13 +14,18 @@ trait Enum[A] {
   def values = _values
 }
 
-sealed trait DiaDeSemana extends DiaDeSemana.Value {
+sealed trait DiaDeSemana extends DiaDeSemana.Value with Ordered[DiaDeSemana] {
   def value: Int
 
   def nombre = this.getClass.getSimpleName.replace("$", "")
+
+  def nombreCorto = nombre.substring(0, 2)
+
+  override def compare(that: DiaDeSemana): Int = value - that.value
 }
 
 object DiaDeSemana extends Enum[DiaDeSemana] {
+  def todos = Seq(Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo)
 
   case object Lunes extends DiaDeSemana {
     val value = DateTimeConstants.MONDAY
@@ -49,6 +54,4 @@ object DiaDeSemana extends Enum[DiaDeSemana] {
   case object Domingo extends DiaDeSemana {
     val value = DateTimeConstants.SUNDAY
   }
-
-  def todos = Seq(Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo)
 }

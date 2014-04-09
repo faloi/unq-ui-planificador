@@ -5,6 +5,7 @@ import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
 import edu.unq.uis.planificador.ui.empleado.ListadoEmpleadosWindow
 import edu.unq.uis.planificador.domain.Empleado
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
+import edu.unq.uis.planificador.domain.calendar.DiaDeSemana.{Martes, Lunes}
 
 object PlanificadorApplication extends Application with App with DevEnvironment {
   override def createMainWindow() = new ListadoEmpleadosWindow(this)

@@ -6,6 +6,7 @@ import com.github.nscala_time.time.TypeImports.Interval
 import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
 import com.github.nscala_time.time.Imports
 import org.uqbar.commons.model.UserException
+import org.uqbar.commons.utils.Observable
 
 case class CalendarSpace(fecha : DateTime, rango : Interval) extends UbicableEnDia with ConRangoHorario
 
@@ -21,13 +22,14 @@ object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with Full
   override def fecha: DateTime = null
 }
 
-case class RecurrentCalendarSpace(inicio: Int, fin: Int, diaDeSemana: Int) extends UbicableEnDia with ConRangoHorario {
-  def this(inicio: Int, fin: Int, diaDeSemana: DiaDeSemana) = this(inicio, fin, diaDeSemana.value)
+@Observable
+case class RecurrentCalendarSpace(var inicio: Int = 0, var fin: Int = 1, var diaDeSemana: DiaDeSemana = DiaDeSemana.Lunes)
+  extends UbicableEnDia with ConRangoHorario {
 
   validar()
   val rango :Interval = TimeInterval.create(inicio, fin)
 
-  override def esDia(dia : DateTime): Boolean = dia.getDayOfWeek == diaDeSemana
+  override def esDia(dia: DateTime): Boolean = dia.getDayOfWeek == diaDeSemana.value
 
   override def fecha: Imports.DateTime = null //TODO: esto no voy a usarlo, no se cual seria la manera correcta
 
