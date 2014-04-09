@@ -22,11 +22,18 @@ object Converters {
       calendarSpace => new DisponibilidadHoraria(toDayOfWeek(calendarSpace.diaDeSemana), calendarSpace.inicio, calendarSpace.fin)
     }
 
-    var nombre = self.nombre
+    //TODO: Scala me tiene que proveer alguna forma más feliz de solucionar esto
+    def nombre = self.nombre
 
-    var apellido = self.apellido
+    def nombre_=(value: String) = self.nombre = value
 
-    var legajo = self.legajo
+    def apellido = self.apellido
+
+    def apellido_=(value: String) = self.apellido = value
+
+    def legajo = self.legajo
+
+    def legajo_=(value: String) = self.legajo = value
 
     def nombreCompleto = s"${self.nombre} ${self.apellido}"
 
