@@ -1,12 +1,11 @@
 package edu.unq.uis.planificador.ui.empleado
 
+import edu.unq.uis.planificador.ui.ArenaScalaExtensions._
 import org.uqbar.arena.windows.{Dialog, WindowOwner, SimpleWindow}
 import org.uqbar.arena.widgets.{Button, Panel}
 import org.uqbar.arena.widgets.tables.{Column, Table}
-import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
 import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
-
 
 class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorEmpleados](parent, new BuscadorEmpleados) {
   getModelObject.search
@@ -14,12 +13,12 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   override def addActions(actionsPanel: Panel) = {
     new Button(actionsPanel)
       .setCaption("Nuevo")
-      .onClick(new Function(() => this.openDialog(new CrearEmpleadoDialog(this))))
+      .onClick(() => this.openDialog(new CrearEmpleadoDialog(this)))
       .setAsDefault
 
     new Button(actionsPanel)
       .setCaption("Editar")
-      .onClick(new Function(() => this.openDialog(new EditarEmpleadoDialog(this, this.getModelObject.empleadoSeleccionado))))
+      .onClick(() => this.openDialog(new EditarEmpleadoDialog(this, this.getModelObject.empleadoSeleccionado)))
   }
 
   override def createFormPanel(mainPanel: Panel): Unit = {
@@ -40,17 +39,17 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
     new Column[EmpleadoModel](table)
       .setTitle("Nombre")
       .setFixedSize(150)
-      .bindContentsToProperty("nombre")
+      .bindContentsToProperty("self.nombre")
 
     new Column[EmpleadoModel](table)
       .setTitle("Apellido")
       .setFixedSize(150)
-      .bindContentsToProperty("apellido")
+      .bindContentsToProperty("self.apellido")
 
     new Column[EmpleadoModel](table)
       .setTitle("Legajo")
       .setFixedSize(100)
-      .bindContentsToProperty("legajo")
+      .bindContentsToProperty("self.legajo")
 
     new Column[EmpleadoModel](table)
       .setTitle("Dias disponible")
@@ -59,7 +58,7 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   }
 
   private def openDialog(dialog: Dialog[_]) {
-    dialog.onAccept(new Function(() => getModelObject.search))
+    dialog.onAccept(() => getModelObject.search)
     dialog.open
   }
 }

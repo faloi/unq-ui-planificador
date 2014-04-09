@@ -22,19 +22,6 @@ object Converters {
       calendarSpace => new DisponibilidadHoraria(toDayOfWeek(calendarSpace.diaDeSemana), calendarSpace.inicio, calendarSpace.fin)
     }
 
-    //TODO: Scala me tiene que proveer alguna forma más feliz de solucionar esto
-    def nombre = self.nombre
-
-    def nombre_=(value: String) = self.nombre = value
-
-    def apellido = self.apellido
-
-    def apellido_=(value: String) = self.apellido = value
-
-    def legajo = self.legajo
-
-    def legajo_=(value: String) = self.legajo = value
-
     def nombreCompleto = s"${self.nombre} ${self.apellido}"
 
     def diasDisponible = disponibilidades

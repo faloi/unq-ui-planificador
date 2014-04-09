@@ -5,29 +5,30 @@ import org.uqbar.arena.widgets._
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.ui.widgets.FormBuilder
 import org.uqbar.arena.widgets.tables.{Column, Table}
-import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
 import edu.unq.uis.planificador.applicationModel.DisponibilidadHoraria
 import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
 import org.uqbar.arena.layout.{VerticalLayout, ColumnLayout}
+import edu.unq.uis.planificador.ui.{ArenaScalaExtensions, AgregarDisponibilidadDialog}
+import ArenaScalaExtensions._
 
 class EditarEmpleadoDialog(owner: WindowOwner, model: EmpleadoModel) extends Dialog[EmpleadoModel](owner, model) with FormBuilder {
   override def addActions(actionsPanel: Panel) {
     new Button(actionsPanel)
       .setCaption("Guardar")
-      .onClick(new Function(() => this.accept))
+      .onClick(() => this.accept)
       .setAsDefault
 
     new Button(actionsPanel)
       .setCaption("Cancelar")
-      .onClick(new Function(() => this.cancel))
+      .onClick(() => this.cancel)
   }
 
   def title = s"Editando ${getModelObject.nombreCompleto}"
 
   val fields = Map(
-    "Nombre" -> "nombre",
-    "Apellido" -> "apellido",
-    "Legajo" -> "legajo"
+    "Nombre" -> "self.nombre",
+    "Apellido" -> "self.apellido",
+    "Legajo" -> "self.legajo"
   )
 
   override def addAdditionalContent(mainPanel: Panel) = {
