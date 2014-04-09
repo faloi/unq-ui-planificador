@@ -14,7 +14,6 @@ import edu.unq.uis.planificador.exceptions.{PlanificadorBusinessException, Unexp
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
-
   val estados: DisponibilidadContainer = new DisponibilidadContainer
 
   val chain =
@@ -25,8 +24,8 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
           case x: Seq[CalendarElement] => Right(x.head)
         }
 
-  def jerarquiaDeDisponibilidades = 
-    chain (estados de Restriccion) +> chain (estados de Asignacion) +> chain (estados de Disponible) +> chain (estados de NoDisponible)
+  def jerarquiaDeDisponibilidades =
+    chain(estados de Restriccion) +> chain(estados de Asignacion) +> chain(estados de Disponible) +> chain(estados de NoDisponible)
 
 
   def disponibilidadPara(turno: Turno): CalendarElement = jerarquiaDeDisponibilidades(turno) match {
