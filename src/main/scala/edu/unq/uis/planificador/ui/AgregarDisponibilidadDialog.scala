@@ -4,12 +4,12 @@ import org.uqbar.arena.windows.{WindowOwner, Dialog}
 import org.uqbar.arena.widgets.{Selector, Button, Panel}
 import edu.unq.uis.planificador.ui.widgets.FormBuilder
 import edu.unq.uis.planificador.applicationModel.DisponibilidadCreator
-import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
 import ArenaScalaExtensions._
 import org.uqbar.arena.bindings.{PropertyAdapter, ObservableProperty}
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana
+import edu.unq.uis.planificador.domain.Empleado
 
-class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: EmpleadoModel)
+class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: Empleado)
   extends Dialog[DisponibilidadCreator](owner, new DisponibilidadCreator(empleado)) with FormBuilder {
 
   val title = "Agregar disponibilidad"

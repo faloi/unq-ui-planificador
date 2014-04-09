@@ -5,13 +5,13 @@ import org.uqbar.arena.widgets._
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.ui.widgets.FormBuilder
 import org.uqbar.arena.widgets.tables.{Column, Table}
-import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
 import org.uqbar.arena.layout.{VerticalLayout, ColumnLayout}
 import edu.unq.uis.planificador.ui.{ArenaScalaExtensions, AgregarDisponibilidadDialog}
 import ArenaScalaExtensions._
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
+import edu.unq.uis.planificador.domain.Empleado
 
-class EditarEmpleadoDialog(owner: WindowOwner, model: EmpleadoModel) extends Dialog[EmpleadoModel](owner, model) with FormBuilder {
+class EditarEmpleadoDialog(owner: WindowOwner, model: Empleado) extends Dialog[Empleado](owner, model) with FormBuilder {
   override def addActions(actionsPanel: Panel) {
     new Button(actionsPanel)
       .setCaption("Guardar")
@@ -26,9 +26,9 @@ class EditarEmpleadoDialog(owner: WindowOwner, model: EmpleadoModel) extends Dia
   def title = s"Editando ${getModelObject.nombreCompleto}"
 
   val fields = Map(
-    "Nombre" -> "self.nombre",
-    "Apellido" -> "self.apellido",
-    "Legajo" -> "self.legajo"
+    "Nombre" -> "nombre",
+    "Apellido" -> "apellido",
+    "Legajo" -> "legajo"
   )
 
   override def addAdditionalContent(mainPanel: Panel) = {
@@ -52,6 +52,7 @@ class EditarEmpleadoDialog(owner: WindowOwner, model: EmpleadoModel) extends Dia
     val table = new Table[RecurrentCalendarSpace](disponibilidadesPanel, classOf[RecurrentCalendarSpace])
     table.bindItemsToProperty("disponibilidades")
     table.setWidth(LARGE_COLUMN + SMALL_COLUMN + SMALL_COLUMN)
+    table.setHeigth(200)
 
     new Column[RecurrentCalendarSpace](table)
       .setTitle("Dia")

@@ -5,6 +5,8 @@ import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
+import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
+import scala.collection.JavaConversions._
 
 class EmpleadoSpec extends BaseSpec {
 
@@ -40,15 +42,30 @@ class EmpleadoSpec extends BaseSpec {
     empleado isDisponibleLos (Turno el "2014-03-24" de 14 a 16) should be(NoDisponible)
   }
 
+  it should "return una coleccion de disponibilidades" in {
+    empleado disponibleLos (Lunes de 15 a 19)
+    empleado disponibleLos (Jueves de 16 a 21)
 
-  //TODO: hay que volver a ponerle las razones especiales, pero por ahora lo matamos
-  //  it should "devolver la razon cuando no esta disponible por restriccion" in {
-  //    empleado restriccionEl new DateTime("2014-03-24T11:00")
-  //
-  //    empleado tieneDisponibilidad (Turno el "2014-03-24" de 11 a 13). should be("Operacion de cadera")
-  //  }
+    val expected = Seq(Lunes de 15 a 19, Jueves de 16 a 21)
+    empleado.disponibilidades should be(expected: java.util.List[RecurrentCalendarSpace])
+  }
 
-  //  it should "devolver la razon cuando no esta disponible por horarios" in {
-  //    empleado tieneDisponibilidad (Turno el "2014-03-24" de 11 a 13).razon should be("No trabaja en ese horario")
-  //  }
+  it should "saber su nombre completo" in {
+    empleado.nombre = "Juan Carlos"
+    empleado.apellido = "Jimenez"
+
+    empleado.nombreCompleto should be("Juan Carlos Jimenez")
+  }
+
+  it should "saber sus dias para los cuales esta disponible normalmente, en orden semanal" in {
+    empleado disponibleLos (Jueves de 16 a 21)
+    empleado disponibleLos (Lunes de 15 a 19)
+    empleado disponibleLos (Viernes de 16 a 21)
+
+    empleado.diasDisponible should be("Lu, Ju, Vi")
+  }
+
+  it should "devolver un string vacio para los dias cuando no tiene disponibilidades" in {
+    empleado.diasDisponible should be("")
+  }
 }

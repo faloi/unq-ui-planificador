@@ -8,7 +8,7 @@ class CrearEmpleadoDialog(owner: WindowOwner) extends EditarEmpleadoDialog(owner
   override val title = "Nuevo empleado"
 
   override def executeTask() {
-    empleadoHome.create(this.getModelObject.self)
+    empleadoHome.create(this.getModelObject)
     super.executeTask()
   }
 }

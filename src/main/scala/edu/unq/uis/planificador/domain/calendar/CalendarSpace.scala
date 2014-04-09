@@ -23,8 +23,8 @@ object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with Full
 }
 
 @Observable
-case class RecurrentCalendarSpace(var inicio: Int = 0, var fin: Int = 1, var diaDeSemana: DiaDeSemana = DiaDeSemana.Lunes)
-  extends UbicableEnDia with ConRangoHorario {
+case class RecurrentCalendarSpace(var inicio: Int = 9, var fin: Int = 18, var diaDeSemana: DiaDeSemana = DiaDeSemana.Lunes)
+extends UbicableEnDia with ConRangoHorario {
 
   validar()
   val rango :Interval = TimeInterval.create(inicio, fin)
