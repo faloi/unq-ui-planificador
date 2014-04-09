@@ -22,11 +22,11 @@ object Converters {
       calendarSpace => new DisponibilidadHoraria(toDayOfWeek(calendarSpace.diaDeSemana), calendarSpace.inicio, calendarSpace.fin)
     }
 
-    def nombre = self.nombre
+    var nombre = self.nombre
 
-    def apellido = self.apellido
+    var apellido = self.apellido
 
-    def legajo = self.legajo
+    var legajo = self.legajo
 
     def nombreCompleto = s"${self.nombre} ${self.apellido}"
 
