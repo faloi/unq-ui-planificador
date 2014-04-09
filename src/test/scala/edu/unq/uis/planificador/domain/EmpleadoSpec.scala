@@ -1,10 +1,10 @@
 package edu.unq.uis.planificador.domain
 
-import com.github.nscala_time.time.Imports._
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder
 import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
+import edu.unq.uis.planificador.exceptions.PlanificadorBusinessException
 
 class EmpleadoSpec extends BaseSpec {
 
@@ -40,8 +40,14 @@ class EmpleadoSpec extends BaseSpec {
     empleado isDisponibleLos (Turno el "2014-03-24" de 14 a 16) should be(NoDisponible)
   }
 
+  it should "lanzar BussinessException si se intenta asignar un turno a un día con restricción" in {
+    empleado restriccionEl "2014-03-24"
+    intercept[PlanificadorBusinessException]{
+      empleado asignar (Turno el "2014-03-24" de 14 a 16)
+    }
+  }
 
-  //TODO: hay que volver a ponerle las razones especiales, pero por ahora lo matamos
+  //TODO: hay que volver a ponerle las razones especiales, pero por ahora lo matamos porque no es un requerimiento
   //  it should "devolver la razon cuando no esta disponible por restriccion" in {
   //    empleado restriccionEl new DateTime("2014-03-24T11:00")
   //

@@ -1,8 +1,6 @@
 package edu.unq.uis.planificador.domain
 
 import edu.unq.uis.planificador.domain.disponibilidad._
-import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
 import edu.unq.uis.planificador.domain.calendar._
 import com.github.nscala_time.time.Imports._
 import org.uqbar.commons.model.Entity
@@ -12,7 +10,7 @@ import Chain._
 import edu.unq.uis.planificador.domain.calendar.CalendarSpace
 import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
-import edu.unq.uis.planificador.exceptions.UnexpectedBusinessException
+import edu.unq.uis.planificador.exceptions.{PlanificadorBusinessException, UnexpectedBusinessException}
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
@@ -49,6 +47,11 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
 
   def asignar(turno: Turno) =
-    this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
+    {
+      isDisponibleLos(turno) match {
+        case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
+        case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
+      }
+    }
 
 }
