@@ -2,8 +2,10 @@ package edu.unq.uis.planificador.applicationModel
 
 import edu.unq.uis.planificador.BaseSpec
 import scala.collection.JavaConversions.asScalaBuffer
+import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
+import edu.unq.uis.planificador.domain.Empleado
 
-class BuscadorEmpleadosSpec extends BaseSpec {
+class BuscadorEmpleadosSpec extends BaseSpec with DevEnvironment {
   var buscador : BuscadorEmpleados = _
 
   before {
@@ -12,6 +14,8 @@ class BuscadorEmpleadosSpec extends BaseSpec {
 
   "El buscador de empleados" should "seleccionar el primer elemento luego de buscar" in {
     buscador.empleadoSeleccionado should be (null)
+
+    empleadoHome.create(new Empleado)
 
     buscador.search
     buscador.empleadoSeleccionado should be (buscador.empleados.head)
