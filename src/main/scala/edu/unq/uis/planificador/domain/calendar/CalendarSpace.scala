@@ -22,6 +22,8 @@ object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with Full
 }
 
 case class RecurrentCalendarSpace(inicio: Int, fin: Int, diaDeSemana: Int) extends UbicableEnDia with ConRangoHorario {
+  def this(inicio: Int, fin: Int, diaDeSemana: DiaDeSemana) = this(inicio, fin, diaDeSemana.value)
+
   validar()
   val rango :Interval = TimeInterval.create(inicio, fin)
 

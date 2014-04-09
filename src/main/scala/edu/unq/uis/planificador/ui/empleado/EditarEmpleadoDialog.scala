@@ -39,7 +39,9 @@ class EditarEmpleadoDialog(owner: WindowOwner, model: EmpleadoModel) extends Dia
     createDisponibilidadTable(disponibilidadesPanel)
 
     val accionesPanel = new Panel(disponibilidadesPanel).setLayout(new VerticalLayout)
-    new Button(accionesPanel).setCaption("Agregar")
+    new Button(accionesPanel)
+      .setCaption("Agregar")
+      .onClick(new Function(() => new AgregarDisponibilidadDialog(this, this.getModelObject).open()))
     new Button(accionesPanel).setCaption("Eliminar")
   }
 
