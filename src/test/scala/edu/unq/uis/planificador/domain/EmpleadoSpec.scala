@@ -68,4 +68,14 @@ class EmpleadoSpec extends BaseSpec {
   it should "devolver un string vacio para los dias cuando no tiene disponibilidades" in {
     empleado.diasDisponible should be("")
   }
+
+  it should "ser capaz de borrar una disponibilidad" in {
+    val disponibilidadLunes = Lunes de 9 a 18
+    val disponibilidadMartes = Martes de 14 a 16
+
+    empleado disponibleLos(disponibilidadLunes, disponibilidadMartes)
+    empleado borrarDisponibilidad (disponibilidadLunes)
+
+    empleado.disponibilidades should be(Seq(disponibilidadMartes): java.util.List[RecurrentCalendarSpace])
+  }
 }

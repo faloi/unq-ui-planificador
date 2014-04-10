@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.applicationModel
+package edu.unq.uis.planificador.applicationModel.disponibilidad
 
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.Empleado

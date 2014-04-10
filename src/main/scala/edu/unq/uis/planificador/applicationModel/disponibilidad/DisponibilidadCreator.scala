@@ -1,4 +1,4 @@
-package edu.unq.uis.planificador.applicationModel
+package edu.unq.uis.planificador.applicationModel.disponibilidad
 
 import org.uqbar.commons.utils.Observable
 import edu.unq.uis.planificador.domain.calendar.{DiaDeSemana, RecurrentCalendarSpace}

@@ -1,9 +1,9 @@
-package edu.unq.uis.planificador.applicationModel
+package edu.unq.uis.planificador.applicationModel.empleado
 
-import edu.unq.uis.planificador.BaseSpec
 import scala.collection.JavaConversions.asScalaBuffer
 import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
 import edu.unq.uis.planificador.domain.Empleado
+import edu.unq.uis.planificador.BaseSpec
 
 class BuscadorEmpleadosSpec extends BaseSpec with DevEnvironment {
   var buscador : BuscadorEmpleados = _

@@ -39,4 +39,6 @@ class DisponibilidadContainer {
   def ++=(calendarElements: Iterable[CalendarElement]) = calendarElements.foreach {
     it => this += it
   }
+
+  def -=(element: RecurrentCalendarSpace) = disponibilidades.remove((Disponible, Right(element.diaDeSemana)))
 }

@@ -1,13 +1,14 @@
 package edu.unq.uis.planificador.ui
 
 import org.uqbar.arena.windows.{WindowOwner, Dialog}
-import org.uqbar.arena.widgets.{Selector, Button, Panel}
+import org.uqbar.arena.widgets.{Label, Selector, Button, Panel}
 import edu.unq.uis.planificador.ui.widgets.FormBuilder
-import edu.unq.uis.planificador.applicationModel.DisponibilidadCreator
 import ArenaScalaExtensions._
 import org.uqbar.arena.bindings.{PropertyAdapter, ObservableProperty}
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana
 import edu.unq.uis.planificador.domain.Empleado
+import edu.unq.uis.planificador.applicationModel.disponibilidad.DisponibilidadCreator
+import org.uqbar.arena.layout.ColumnLayout
 
 class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: Empleado)
   extends Dialog[DisponibilidadCreator](owner, new DisponibilidadCreator(empleado)) with FormBuilder {
@@ -22,9 +23,15 @@ class AgregarDisponibilidadDialog(owner: WindowOwner, empleado: Empleado)
   onAccept(() => this.getModelObject.agregarDisponibilidad)
 
   override def addAdditionalContent(mainPanel: Panel) {
-    val selector = new Selector[DiaDeSemana](mainPanel)
+    val container = new Panel(mainPanel)
+    container.setLayout(new ColumnLayout(2))
+
+    new Label(container).setText("Dia").setWidth(100)
+
+    val selector = new Selector[DiaDeSemana](container)
     selector
       .allowNull(false)
+      .setWidth(250)
       .bindValueToProperty("entity.diaDeSemana")
 
     selector

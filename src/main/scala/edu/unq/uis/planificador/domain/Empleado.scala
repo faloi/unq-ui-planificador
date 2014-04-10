@@ -35,19 +35,12 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
 
-  def disponibleLos(intervals: RecurrentCalendarSpace*) = {
-    estados ++= intervals.map {
-      it => CalendarElement(Disponible, it)
-    }
-    ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
-  }
-
   def restriccionEl(fecha: String) =
     this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(new DateTime(fecha)))
 
-
   def asignar(turno: Turno) =
     this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
+
 
   def disponibilidades: java.util.List[RecurrentCalendarSpace] =
     (estados de Disponible)
@@ -61,4 +54,20 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
   def nombreCompleto = s"$nombre $apellido"
 
   def diasDisponible = disponibilidades.map(_.diaDeSemana.nombreCorto).mkString(", ")
+
+  def borrarDisponibilidad(unaDisponibilidad: RecurrentCalendarSpace) = {
+    estados -= unaDisponibilidad
+    fireDisponibilidadesChanged
+  }
+
+  def disponibleLos(intervals: RecurrentCalendarSpace*) = {
+    estados ++= intervals.map {
+      it => CalendarElement(Disponible, it)
+    }
+    fireDisponibilidadesChanged
+  }
+
+  private def fireDisponibilidadesChanged {
+    ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
+  }
 }
