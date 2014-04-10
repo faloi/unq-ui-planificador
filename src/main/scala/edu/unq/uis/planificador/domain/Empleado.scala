@@ -10,8 +10,8 @@ import Chain._
 import edu.unq.uis.planificador.domain.calendar.CalendarSpace
 import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
-import edu.unq.uis.planificador.exceptions.UnexpectedBusinessException
 import scala.collection.JavaConversions._
+import edu.unq.uis.planificador.exceptions.{PlanificadorBusinessException, UnexpectedBusinessException}
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
@@ -39,8 +39,12 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
     this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(new DateTime(fecha)))
 
   def asignar(turno: Turno) =
-    this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
-
+    {
+      isDisponibleLos(turno) match {
+        case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
+        case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
+      }
+    }
 
   def disponibilidades: java.util.List[RecurrentCalendarSpace] =
     (estados de Disponible)
@@ -57,17 +61,17 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def borrarDisponibilidad(unaDisponibilidad: RecurrentCalendarSpace) = {
     estados -= unaDisponibilidad
-    fireDisponibilidadesChanged
+    fireDisponibilidadesChanged()
   }
 
   def disponibleLos(intervals: RecurrentCalendarSpace*) = {
     estados ++= intervals.map {
       it => CalendarElement(Disponible, it)
     }
-    fireDisponibilidadesChanged
+    fireDisponibilidadesChanged()
   }
 
-  private def fireDisponibilidadesChanged {
+  private def fireDisponibilidadesChanged() {
     ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
   }
 }

@@ -1,5 +1,6 @@
 package edu.unq.uis.planificador.domain
 
+import com.github.nscala_time.time.Imports._
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder
 import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
@@ -7,6 +8,7 @@ import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
 import scala.collection.JavaConversions._
+import edu.unq.uis.planificador.exceptions.PlanificadorBusinessException
 
 class EmpleadoSpec extends BaseSpec {
 
@@ -42,12 +44,15 @@ class EmpleadoSpec extends BaseSpec {
     empleado isDisponibleLos (Turno el "2014-03-24" de 14 a 16) should be(NoDisponible)
   }
 
+  it should "lanzar BussinessException si se intenta asignar un turno a un día con restricción" in {
+    empleado restriccionEl "2014-03-24"
+    intercept[PlanificadorBusinessException]{
+      empleado asignar (Turno el "2014-03-24" de 14 a 16)
+    }
+  }
   it should "return una coleccion de disponibilidades" in {
     empleado disponibleLos (Lunes de 15 a 19)
     empleado disponibleLos (Jueves de 16 a 21)
-
-    val expected = Seq(Lunes de 15 a 19, Jueves de 16 a 21)
-    empleado.disponibilidades should be(expected: java.util.List[RecurrentCalendarSpace])
   }
 
   it should "saber su nombre completo" in {
