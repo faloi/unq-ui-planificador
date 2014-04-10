@@ -1,7 +1,7 @@
 package edu.unq.uis.planificador.domain.disponibilidad
 
 import scala.collection.mutable
-import edu.unq.uis.planificador.domain.calendar.{RecurrentCalendarSpace, CalendarElement}
+import edu.unq.uis.planificador.domain.calendar.{DiaDeSemana, RecurrentCalendarSpace, CalendarElement}
 import org.joda.time.DateTime
 
 class DisponibilidadContainer {
@@ -12,8 +12,8 @@ class DisponibilidadContainer {
     }
   }
 
-  val disponibilidades: mutable.Map[(Disponibilidad, Either[DateTime, Int]), CalendarElement] =
-    mutable.HashMap.empty[(Disponibilidad, Either[DateTime, Int]), CalendarElement]
+  val disponibilidades: mutable.Map[(Disponibilidad, Either[DateTime, DiaDeSemana]), CalendarElement] =
+    mutable.HashMap.empty[(Disponibilidad, Either[DateTime, DiaDeSemana]), CalendarElement]
 
   /**
    * @param estado : Disponible, Asignacion, Restriccion o NoDisponible
@@ -30,8 +30,15 @@ class DisponibilidadContainer {
   /**
    * Agrega un CalendarElement al mapa de disponibilidades
    */
-  def +=(ce : CalendarElement) = ce match {
-    case CalendarElement(Disponible, space: RecurrentCalendarSpace) => disponibilidades += ((Disponible, Right(space.diaDeSemana)) -> CalendarElement(Disponible, space))
+  def +=(ce: CalendarElement) = ce match {
+    case CalendarElement(Disponible, space: RecurrentCalendarSpace) =>
+      disponibilidades += ((Disponible, Right(space.diaDeSemana)) -> CalendarElement(Disponible, space))
     case e: CalendarElement => disponibilidades += ((e.disponibilidad, Left(e.calendarSpace.fecha)) -> e)
   }
+
+  def ++=(calendarElements: Iterable[CalendarElement]) = calendarElements.foreach {
+    it => this += it
+  }
+
+  def -=(element: RecurrentCalendarSpace) = disponibilidades.remove((Disponible, Right(element.diaDeSemana)))
 }

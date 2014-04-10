@@ -1,12 +1,11 @@
 package edu.unq.uis.planificador.ui.empleado
 
+import edu.unq.uis.planificador.ui.ArenaScalaExtensions._
 import org.uqbar.arena.windows.{Dialog, WindowOwner, SimpleWindow}
 import org.uqbar.arena.widgets.{Button, Panel}
 import org.uqbar.arena.widgets.tables.{Column, Table}
-import org.uqbar.arena.aop.potm.Function
-import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
-import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
-
+import edu.unq.uis.planificador.domain.Empleado
+import edu.unq.uis.planificador.applicationModel.empleado.BuscadorEmpleados
 
 class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorEmpleados](parent, new BuscadorEmpleados) {
   getModelObject.search
@@ -14,12 +13,12 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   override def addActions(actionsPanel: Panel) = {
     new Button(actionsPanel)
       .setCaption("Nuevo")
-      .onClick(new Function(() => this.openDialog(new CrearEmpleadoDialog(this))))
+      .onClick(() => this.openDialog(new CrearEmpleadoDialog(this)))
       .setAsDefault
 
     new Button(actionsPanel)
       .setCaption("Editar")
-      .onClick(new Function(() => this.openDialog(new EditarEmpleadoDialog(this, this.getModelObject.empleadoSeleccionado))))
+      .onClick(() => this.openDialog(new EditarEmpleadoDialog(this, this.getModelObject.empleadoSeleccionado)))
   }
 
   override def createFormPanel(mainPanel: Panel): Unit = {
@@ -28,7 +27,7 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
   }
 
   def createResultsGrid(panel: Panel) {
-    val table = new Table[EmpleadoModel](panel, classOf[EmpleadoModel])
+    val table = new Table[Empleado](panel, classOf[Empleado])
     table.bindItemsToProperty("empleados")
     table.bindSelectionToProperty("empleadoSeleccionado")
     table.setHeigth(250)
@@ -36,30 +35,30 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
     this.describeResultsGrid(table)
   }
 
-  def describeResultsGrid(table: Table[EmpleadoModel]) {
-    new Column[EmpleadoModel](table)
+  def describeResultsGrid(table: Table[Empleado]) {
+    new Column[Empleado](table)
       .setTitle("Nombre")
       .setFixedSize(150)
       .bindContentsToProperty("nombre")
 
-    new Column[EmpleadoModel](table)
+    new Column[Empleado](table)
       .setTitle("Apellido")
       .setFixedSize(150)
       .bindContentsToProperty("apellido")
 
-    new Column[EmpleadoModel](table)
+    new Column[Empleado](table)
       .setTitle("Legajo")
       .setFixedSize(100)
       .bindContentsToProperty("legajo")
 
-    new Column[EmpleadoModel](table)
+    new Column[Empleado](table)
       .setTitle("Dias disponible")
       .setFixedSize(200)
       .bindContentsToProperty("diasDisponible")
   }
 
   private def openDialog(dialog: Dialog[_]) {
-    dialog.onAccept(new Function(() => getModelObject.search))
+    dialog.onAccept(() => getModelObject.search)
     dialog.open
   }
 }
