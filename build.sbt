@@ -4,7 +4,7 @@ version := "1.0"
 
 scalaVersion := "2.10.2"
 
-resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL +"/.m2/repository"
+resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL + "/.m2/repository"
 
 resolvers += "Uqbar repo releases" at "http://uqbar-wiki.org/mvn/releases"
 
@@ -16,7 +16,7 @@ resolvers += "swt-repo" at "https://swt-repo.googlecode.com/svn/repo/"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
-libraryDependencies += "org.uqbar-project" % "arena-jface" % "3.3-SNAPSHOT"
+libraryDependencies += "org.uqbar-project" % "arena-jface" % "3.4-SNAPSHOT"
 
 libraryDependencies += "joda-time" % "joda-time" % "2.3"
 
