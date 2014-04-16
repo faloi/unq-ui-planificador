@@ -10,7 +10,6 @@ import Chain._
 import edu.unq.uis.planificador.domain.calendar.CalendarSpace
 import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
-import scala.collection.JavaConversions._
 import edu.unq.uis.planificador.exceptions.{PlanificadorBusinessException, UnexpectedBusinessException}
 
 @Observable
@@ -46,7 +45,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
       }
     }
 
-  def disponibilidades: java.util.List[RecurrentCalendarSpace] =
+  def disponibilidades =
     (estados de Disponible)
       .map {
       element => element.calendarSpace match {
