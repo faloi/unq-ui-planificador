@@ -30,7 +30,6 @@ class ListadoEmpleadosWindow(parent: WindowOwner) extends SimpleWindow[BuscadorE
     val table = new Table[Empleado](panel, classOf[Empleado])
     table.bindItemsToProperty("empleados")
     table.bindSelectionToProperty("empleadoSeleccionado")
-    table.setHeigth(250)
 
     this.describeResultsGrid(table)
   }

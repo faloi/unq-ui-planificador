@@ -100,7 +100,6 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Window[T](pa
       val table = new Table[FinalType](panel, new TypeInspector[FinalType]().instance())
       table.bindItemsToProperty(bindItemsTo)
       table.bindSelectionToProperty(bindSelectionTo)
-      table.setHeigth(height)
       table
     }
   }

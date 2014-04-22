@@ -59,7 +59,6 @@ with FormBuilder {
     table.bindItemsToProperty("entity.disponibilidades")
     table.bindSelectionToProperty("disponibilidadSeleccionada")
     table.setWidth(LARGE_COLUMN + SMALL_COLUMN + SMALL_COLUMN)
-    table.setHeigth(200)
 
     new Column[RecurrentCalendarSpace](table)
       .setTitle("Dia")

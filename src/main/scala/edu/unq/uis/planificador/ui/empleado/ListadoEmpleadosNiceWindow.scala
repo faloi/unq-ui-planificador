@@ -2,17 +2,17 @@ package edu.unq.uis.planificador.ui.empleado
 
 import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import org.uqbar.arena.windows.{Dialog, WindowOwner}
-import edu.unq.uis.planificador.applicationModel.BuscadorEmpleados
-import edu.unq.uis.planificador.applicationModel.Converters.EmpleadoModel
 import org.uqbar.arena.aop.potm.Function
+import edu.unq.uis.planificador.applicationModel.empleado.BuscadorEmpleados
+import edu.unq.uis.planificador.domain.Empleado
 
-class DSLPruebaDialog(parent: WindowOwner) extends NiceWindow[BuscadorEmpleados](parent, new BuscadorEmpleados){
+class ListadoEmpleadosNiceWindow(parent: WindowOwner) extends NiceWindow[BuscadorEmpleados](parent, new BuscadorEmpleados){
   getModelObject.search
 
   override def windowDefinition: Renderizable =
 
   LayoutVertical(
-      TableWidget[EmpleadoModel](
+      TableWidget[Empleado](
         bindItemsTo = "empleados",
         bindSelectionTo = "empleadoSeleccionado",
         height = 250,
