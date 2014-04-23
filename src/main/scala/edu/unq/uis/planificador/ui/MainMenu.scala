@@ -6,7 +6,7 @@ import edu.unq.uis.planificador.applicationModel.DummyModel
 import edu.unq.uis.planificador.ui.empleado.ListadoEmpleadosWindow
 import edu.unq.uis.planificador.ui.planificacion.PlanificacionDeLaSemana
 import edu.unq.uis.planificador.domain.Planificacion
-import org.joda.time.LocalDate
+import org.joda.time.DateTime
 
 class MainMenu(parent: WindowOwner) extends NiceWindow[DummyModel](parent, new DummyModel) {
 
@@ -25,7 +25,7 @@ class MainMenu(parent: WindowOwner) extends NiceWindow[DummyModel](parent, new D
         ),
         Boton(
           label = "Ver planificacion",
-          onClick = () => openNew(new VerPlanificacionWindow(this, new Planificacion(new LocalDate().toDateTimeAtStartOfDay)))
+          onClick = () => openNew(new VerPlanificacionWindow(this, new Planificacion(new DateTime("2014-04-21"))))
         ),
         Boton(
           label = "Buscar Planificación",
