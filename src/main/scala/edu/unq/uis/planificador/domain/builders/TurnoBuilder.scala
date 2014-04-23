@@ -5,7 +5,7 @@ import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
 import edu.unq.uis.planificador.domain.disponibilidad.Turno
 import org.uqbar.commons.model.UserException
 
-class TurnoBuilder(dia: DateTime, doValidar : Boolean = true) {
+class TurnoBuilder(dia: DateTime) {
   var inicio = 0
   var fin = 0
 
@@ -16,7 +16,7 @@ class TurnoBuilder(dia: DateTime, doValidar : Boolean = true) {
 
   def a(unFin: Int): Turno = {
     this.fin = unFin
-    if(doValidar) validar()
+    validar()
     new Turno(dia, TimeInterval.create(inicio, fin))
   }
 
@@ -25,5 +25,6 @@ class TurnoBuilder(dia: DateTime, doValidar : Boolean = true) {
     if (fin > 23) throw new UserException("Workaholic! No se puede trabajar después de la hora 24!")
     if (inicio > fin) throw new UserException("No tiene sentido terminar de trabajar antes de empezar :)")
     if (fin - inicio < 4) throw new UserException("No pueden crearse turnos de menos de 4 ahoras")
+    if (fin - inicio > 8) throw new UserException("No pueden crearse turnos de más de 8 horas")
   }
 }
