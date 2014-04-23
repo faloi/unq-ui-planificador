@@ -19,8 +19,8 @@ class PlanificacionDeLaSemana(parent: WindowOwner) extends NiceWindow[BuscadorPl
         bindItemsTo = "planificaciones",
         bindSelectionTo = "planificacionSeleccionada",
         height = 600,
-        TableColumn(bindTo = Right((p:Planificacion) => DateTimeFormat.forPattern("dd/MM/yyyy").print(p.fecha)) ),
-        TableColumn(bindTo = Left("estado") )
+        TableColumn(bindTo = Right((p: Planificacion) => DateTimeFormat.forPattern("dd/MM/yyyy").print(p.fecha))),
+        TableColumn(bindTo = Left("estado"))
       ),
       LayoutHorizontal(
         Boton(
@@ -29,7 +29,7 @@ class PlanificacionDeLaSemana(parent: WindowOwner) extends NiceWindow[BuscadorPl
         ),
         Boton(
           label = "Ver Horarios",
-          onClick = () => false
+          onClick = () => openDialog(new VerHorariosDialog(this, getModelObject.planificacionSeleccionada))
         )
       )
 

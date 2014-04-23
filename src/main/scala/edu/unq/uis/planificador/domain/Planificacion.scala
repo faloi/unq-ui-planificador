@@ -8,6 +8,10 @@ import org.uqbar.commons.utils.Observable
 
 @Observable
 case class Planificacion(fecha: DateTime) extends Entity with DevEnvironment {
+  def asignacionDe(unEmpleado: Empleado) = {
+    unEmpleado.asignacionPara(fecha).get
+  }
+
   def empleados: Seq[Empleado] = empleadoHome
     .allInstances()
     .asScala
