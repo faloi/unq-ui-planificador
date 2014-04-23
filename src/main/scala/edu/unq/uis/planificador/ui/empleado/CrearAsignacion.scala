@@ -43,7 +43,7 @@ class CrearAsignacion (parent: WindowOwner,planificacion: Planificacion ) extend
       TableWidget[Empleado](
         bindItemsTo = "buscador.empleados",
         bindSelectionTo = "buscador.empleadoSeleccionado",
-        height = 800,
+        height = 400,
         TableColumn(width = 80, bindTo = Left("nombre") ),
         TableColumn(width = 80, bindTo = Right((e:Empleado) =>
           e.disponibilidadPara ( Turno.el(planificacion.fecha)

@@ -35,7 +35,7 @@ class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
       TableWidget[Empleado](
         bindItemsTo = "empleados",
         bindSelectionTo = "empleadoSeleccionado",
-        height = 800,
+        height = 400,
 
         columnas: _*
       ),

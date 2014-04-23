@@ -129,6 +129,7 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](pa
   case class TableWidget[ModelType: Manifest](bindItemsTo: String, bindSelectionTo: String, height: Integer, children: TableColumn[ModelType]*) extends Renderizable {
     override def renderTo(panel: Panel): Renderizable = {
       val tabla: Table[ModelType] = renderWithType[ModelType](panel)
+      tabla.setHeight(height)
       children.foreach(_.renderTo(tabla))
       this
     }
