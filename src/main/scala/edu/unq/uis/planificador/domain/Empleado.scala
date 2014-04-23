@@ -32,6 +32,10 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
     case Left(_) => throw UnexpectedBusinessException("Jerarquía de disponibilidades mal definida")
   }
 
+  def disponibilidadPara(fecha: DateTime, bloque: Int) = {
+    true
+  }
+
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
 
   def restriccionEl(fecha: String) =
