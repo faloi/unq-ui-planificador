@@ -5,6 +5,10 @@ import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import edu.unq.uis.planificador.domain.Planificacion
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.applicationModel.planificacion.BuscadorPlanificacion
+import org.joda.time.format.DateTimeFormat
+import edu.unq.uis.planificador.ui.{VerPlanificacionWindow, ArenaScalaExtensions}
+import ArenaScalaExtensions._
+
 
 class PlanificacionDeLaSemana (parent: WindowOwner) extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion){
   getModelObject.search
@@ -16,13 +20,13 @@ class PlanificacionDeLaSemana (parent: WindowOwner) extends NiceWindow[BuscadorP
         bindItemsTo = "planificaciones",
         bindSelectionTo = "planificacionSeleccionada",
         height = 600,
-        TableColumn(bindTo = "fecha" ),
-        TableColumn(bindTo = "estado")
+        TableColumn(bindTo = Right((p:Planificacion) => DateTimeFormat.forPattern("dd/MM/yyyy").print(p.fecha)) ),
+        TableColumn(bindTo = Left("estado") )
       ),
       LayoutHorizontal(
         Boton(
           label = "Planificar",
-          onClick = () => false
+          onClick = () => new VerPlanificacionWindow(this, getModelObject.planificacionSeleccionada).open()
         ),
         Boton(
           label = "Ver Horarios",

@@ -12,7 +12,7 @@ class BuscadorPlanificacion(planificacion: Planificacion) {
   var empleadoSeleccionado: Empleado = _
 
   def disponibilidadEmpleadoEnBloque(empleado: Empleado, bloque: Int) = {
-    if (empleado.disponibilidadPara(planificacion.dia, bloque)) "X" else ""
+    if (empleado.disponibilidadPara(planificacion.fecha, bloque)) "X" else ""
   }
 }
 
