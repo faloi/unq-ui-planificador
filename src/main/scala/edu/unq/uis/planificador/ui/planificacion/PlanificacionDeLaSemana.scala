@@ -9,8 +9,7 @@ import org.joda.time.format.DateTimeFormat
 import edu.unq.uis.planificador.ui.{VerPlanificacionWindow, ArenaScalaExtensions}
 import ArenaScalaExtensions._
 
-
-class PlanificacionDeLaSemana (parent: WindowOwner) extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion){
+class PlanificacionDeLaSemana(parent: WindowOwner) extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion) {
   getModelObject.search
 
   override def windowDefinition: Renderizable =
