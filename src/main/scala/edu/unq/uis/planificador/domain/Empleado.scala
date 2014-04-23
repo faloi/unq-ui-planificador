@@ -57,11 +57,20 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def diasDisponible = disponibilidades.map(_.diaDeSemana.nombreCorto).mkString(", ")
 
-  def restriccionesUserFriendly = (estados de Restriccion).map(_.calendarSpace.fechaUserFriendly).mkString(" - ")
+  def restriccionesUserFriendly = restricciones.map(_.calendarSpace.fechaUserFriendly).mkString(" - ")
+
+
+  def restricciones: Seq[CalendarElement] = {
+    (estados de Restriccion)
+  }
 
   def borrarDisponibilidad(unaDisponibilidad: RecurrentCalendarSpace) = {
     estados -= unaDisponibilidad
     fireDisponibilidadesChanged()
+  }
+
+  def borrarRestriccion(restriccion: CalendarElement) = {
+    estados -= restriccion
   }
 
   def borrarAsignacionConFecha(unaFecha: DateTime) = {
