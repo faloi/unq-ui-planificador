@@ -7,7 +7,7 @@ import org.apache.commons.collections15.Predicate
 object PlanificacionesCollectionBasedHome  extends CollectionBasedHome[Planificacion]{
   override def getCriterio(example: Planificacion): Predicate[_] = null
 
-  override def createExample(): Planificacion = _
+  override def createExample(): Planificacion = null
 
   override def getEntityType: Class[Planificacion] = classOf[Planificacion]
 }

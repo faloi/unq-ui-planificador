@@ -4,6 +4,7 @@ import org.uqbar.arena.windows.WindowOwner
 import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import edu.unq.uis.planificador.applicationModel.DummyModel
 import edu.unq.uis.planificador.ui.empleado.ListadoEmpleadosNiceWindow
+import edu.unq.uis.planificador.ui.planificacion.PlanificacionDeLaSemana
 
 class MainMenu (parent: WindowOwner) extends NiceWindow[DummyModel](parent, new DummyModel){
 
@@ -17,8 +18,8 @@ class MainMenu (parent: WindowOwner) extends NiceWindow[DummyModel](parent, new 
           onClick = () => openNew(new ListadoEmpleadosNiceWindow(this))
         ),
         Boton(
-          label = "Planificar Día",
-          onClick = () => openNew(new ListadoEmpleadosNiceWindow(this))
+          label = "Buscar Planificación",
+          onClick = () => openNew(new PlanificacionDeLaSemana(this))
         )
       )
 
