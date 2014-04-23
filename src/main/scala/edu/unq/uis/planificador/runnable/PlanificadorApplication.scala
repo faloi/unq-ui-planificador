@@ -2,7 +2,6 @@ package edu.unq.uis.planificador.runnable
 
 import org.uqbar.arena.Application
 import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
-import edu.unq.uis.planificador.ui.empleado.{ListadoEmpleadosNiceWindow, ListadoEmpleadosWindow}
 import edu.unq.uis.planificador.domain.Empleado
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana.{Martes, Lunes}
