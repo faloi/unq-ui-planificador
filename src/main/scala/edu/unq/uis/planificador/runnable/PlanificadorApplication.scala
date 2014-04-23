@@ -6,9 +6,10 @@ import edu.unq.uis.planificador.ui.empleado.{ListadoEmpleadosNiceWindow, Listado
 import edu.unq.uis.planificador.domain.Empleado
 import edu.unq.uis.planificador.domain.builders.RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana.{Martes, Lunes}
+import edu.unq.uis.planificador.ui.MainMenu
 
 object PlanificadorApplication extends Application with App with DevEnvironment {
-  override def createMainWindow() = new ListadoEmpleadosNiceWindow(this)
+  override def createMainWindow() = new MainMenu(this)
 
   createEmpleadosFixture
   start()

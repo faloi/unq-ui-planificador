@@ -1,6 +1,6 @@
 package edu.unq.uis.planificador.ui.widgets
 
-import org.uqbar.arena.windows.{MessageBox, Window, WindowOwner}
+import org.uqbar.arena.windows.{Dialog, MessageBox, Window, WindowOwner}
 import org.uqbar.ui.view.ErrorViewer
 import org.uqbar.arena.widgets.{Button, Panel}
 import org.uqbar.arena.layout.{ColumnLayout, Layout, HorizontalLayout, VerticalLayout}
@@ -118,6 +118,7 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Window[T](pa
       m.runtimeClass.asInstanceOf[Class[GenericType]]
   }
 
+  def openNew(w:Window[_]) = w.open()
 }
 
 

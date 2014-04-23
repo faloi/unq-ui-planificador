@@ -34,8 +34,7 @@ class ListadoEmpleadosNiceWindow(parent: WindowOwner) extends NiceWindow[Buscado
 
   )
 
-
-  private def openDialog(dialog: Dialog[_]) {
+  def openDialog(dialog: Dialog[_]) {
     dialog.onAccept(new Function(() => getModelObject.search))
     dialog.open()
   }
