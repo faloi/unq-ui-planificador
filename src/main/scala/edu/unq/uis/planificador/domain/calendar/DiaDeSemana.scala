@@ -1,6 +1,6 @@
 package edu.unq.uis.planificador.domain.calendar
 
-import org.joda.time.DateTimeConstants
+import org.joda.time.{DateTime, DateTimeConstants}
 
 trait Enum[A] {
 
@@ -26,6 +26,8 @@ sealed trait DiaDeSemana extends DiaDeSemana.Value with Ordered[DiaDeSemana] {
 
 object DiaDeSemana extends Enum[DiaDeSemana] {
   def todos = Seq(Lunes, Martes, Miercoles, Jueves, Viernes, Sabado, Domingo)
+
+  def fromFecha(fecha: DateTime) = todos.find(_.value == fecha.getDayOfWeek).get
 
   case object Lunes extends DiaDeSemana {
     val value = DateTimeConstants.MONDAY

@@ -101,4 +101,11 @@ class EmpleadoSpec extends BaseSpec {
 
     estaAsignado() should be(false)
   }
+
+  it should "devolver sus restricciones en forma user friendly" in {
+    empleado restriccionEl "2014-04-23"
+    empleado restriccionEl "2014-04-24"
+
+    empleado.restriccionesUserFriendly should be("Jueves 24/04 - Miercoles 23/04")
+  }
 }
