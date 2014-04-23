@@ -17,7 +17,7 @@ class EmpleadoSpec extends BaseSpec {
   }
 
   "Un empleado" should "no tener disponibilidad por default" in {
-    empleado.isDisponibleLos(Turno el "2004-12-13" de 9 a 18) should be(NoDisponible)
+    empleado.isDisponibleLos(Turno el "2004-12-13" de 9 a 17) should be(NoDisponible)
   }
 
   it should "responder si esta disponible para un turno cuando tiene disponibilidades configuradas" in {
