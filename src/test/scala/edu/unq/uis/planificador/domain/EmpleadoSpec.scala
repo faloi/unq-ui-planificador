@@ -6,6 +6,7 @@ import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
 import edu.unq.uis.planificador.exceptions.PlanificadorBusinessException
+import org.joda.time.DateTime
 
 class EmpleadoSpec extends BaseSpec {
 
@@ -76,8 +77,15 @@ class EmpleadoSpec extends BaseSpec {
     val disponibilidadMartes = Martes de 14 a 16
 
     empleado disponibleLos(disponibilidadLunes, disponibilidadMartes)
-    empleado borrarDisponibilidad (disponibilidadLunes)
+    empleado borrarDisponibilidad disponibilidadLunes
 
     empleado.disponibilidades should be(Seq(disponibilidadMartes))
+  }
+
+  it should "conocer si tiene una asignación para un día" in {
+    empleado disponibleLos (Lunes de 9 a 18)
+    empleado asignar (Turno el "2014-03-07" de 14 a 16)
+    ((empleado asignacionesPara new DateTime("2014-03-07") ) isEmpty ) should be(false)
+
   }
 }

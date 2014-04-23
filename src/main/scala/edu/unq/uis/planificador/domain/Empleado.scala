@@ -37,8 +37,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
   def restriccionEl(fecha: String) =
     this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(new DateTime(fecha)))
 
-  def asignar(turno: Turno) =
-    {
+  def asignar(turno: Turno){
       isDisponibleLos(turno) match {
         case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
         case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
@@ -72,5 +71,9 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   private def fireDisponibilidadesChanged() {
     ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
+  }
+
+  def asignacionesPara(fecha: DateTime): Seq[CalendarElement] = {
+    (estados de Asignacion).filter( (c : CalendarElement) => c.calendarSpace.esDia(fecha))
   }
 }
