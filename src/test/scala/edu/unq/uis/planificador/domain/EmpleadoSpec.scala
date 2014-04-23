@@ -24,28 +24,28 @@ class EmpleadoSpec extends BaseSpec {
     empleado disponibleLos (Jueves de 10 a 18)
     empleado disponibleLos (Lunes de 10 a 18)
 
-    empleado isDisponibleLos (Turno el "2014-03-24" de 11 a 14) should be(Disponible)
-    empleado isDisponibleLos (Turno el "2014-03-27" de 15 a 17) should be(Disponible)
+    empleado isDisponibleLos (Turno el "2014-03-24" de 10 a 14) should be(Disponible)
+    empleado isDisponibleLos (Turno el "2014-03-27" de 11 a 17) should be(Disponible)
   }
 
   it should "no estar disponible si hay una restriccion especifica para un dia normalmente habilitado" in {
     empleado disponibleLos (Lunes de 10 a 18)
     empleado restriccionEl "2014-03-24"
 
-    empleado isDisponibleLos (Turno el "2014-03-24" de 11 a 13) should be(Restriccion)
+    empleado isDisponibleLos (Turno el "2014-03-24" de 11 a 16) should be(Restriccion)
   }
 
   it should "pisar la disponibilidad anterior cuando se agrega otra para el mismo dia" in {
     empleado disponibleLos (Lunes de 10 a 18)
     empleado disponibleLos (Lunes de 10 a 13)
 
-    empleado isDisponibleLos (Turno el "2014-03-24" de 14 a 16) should be(NoDisponible)
+    empleado isDisponibleLos (Turno el "2014-03-24" de 14 a 18) should be(NoDisponible)
   }
 
   it should "lanzar BussinessException si se intenta asignar un turno a un día con restricción" in {
     empleado restriccionEl "2014-03-24"
     intercept[PlanificadorBusinessException]{
-      empleado asignar (Turno el "2014-03-24" de 14 a 16)
+      empleado asignar (Turno el "2014-03-24" de 12 a 16)
     }
   }
   it should "return una coleccion de disponibilidades" in {
@@ -84,14 +84,14 @@ class EmpleadoSpec extends BaseSpec {
 
   it should "conocer si tiene una asignación para un día" in {
     empleado disponibleLos (Lunes de 9 a 18)
-    empleado asignar (Turno el "2014-03-07" de 14 a 16)
+    empleado asignar (Turno el "2014-03-07" de 11 a 18)
     ((empleado asignacionPara new DateTime("2014-03-07")) isEmpty) should be(false)
 
   }
 
   it should "ser capaz de borrar una asignacion" in {
     empleado disponibleLos (Lunes de 9 a 18)
-    empleado asignar (Turno el "2014-03-07" de 14 a 16)
+    empleado asignar (Turno el "2014-03-07" de 12 a 16)
 
     val estaAsignado = () => empleado asignacionPara (new DateTime("2014-03-07")) isDefined
 
