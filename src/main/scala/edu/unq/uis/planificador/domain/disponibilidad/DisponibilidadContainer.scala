@@ -41,4 +41,6 @@ class DisponibilidadContainer {
   }
 
   def -=(element: RecurrentCalendarSpace) = disponibilidades.remove((Disponible, Right(element.diaDeSemana)))
+
+  def -=(element: CalendarElement) = disponibilidades.remove((element.disponibilidad, Left(element.calendarSpace.fecha)))
 }

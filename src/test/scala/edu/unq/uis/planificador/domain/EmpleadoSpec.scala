@@ -88,4 +88,17 @@ class EmpleadoSpec extends BaseSpec {
     ((empleado asignacionPara new DateTime("2014-03-07")) isEmpty) should be(false)
 
   }
+
+  it should "ser capaz de borrar una asignacion" in {
+    empleado disponibleLos (Lunes de 9 a 18)
+    empleado asignar (Turno el "2014-03-07" de 14 a 16)
+
+    val estaAsignado = () => empleado asignacionPara (new DateTime("2014-03-07")) isDefined
+
+    estaAsignado() should be(true)
+
+    empleado borrarAsignacionConFecha (new DateTime("2014-03-07"))
+
+    estaAsignado() should be(false)
+  }
 }

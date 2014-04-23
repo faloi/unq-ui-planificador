@@ -8,16 +8,27 @@ import ArenaScalaExtensions._
 
 @Observable
 class BuscadorPlanificacion(planificacion: Planificacion) {
-  var empleados: Seq[Empleado] = planificacion.empleados
+  var empleados: Seq[Empleado] = _
   var empleadoSeleccionado: Empleado = _
+
+  def search() = {
+    empleados = planificacion.empleados
+  }
 
   def disponibilidadEmpleadoEnBloque(empleado: Empleado, bloque: Int) = {
     if (empleado.asignacionPara(planificacion.fecha).get.incluye(bloque)) "X" else ""
+  }
+
+  def quitarAsignacion() = {
+    planificacion.quitarAsignacionA(empleadoSeleccionado)
+    search()
   }
 }
 
 class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
   extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion(planificacion)) {
+  getModelObject.search()
+
   override def windowDefinition: Renderizable =
     LayoutVertical(
       TableWidget[Empleado](
@@ -26,6 +37,11 @@ class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
         height = 800,
 
         columnas: _*
+      ),
+
+      LayoutHorizontal(
+        Boton(label = "Agregar asignación", onClick = () => {}),
+        Boton(label = "Quitar asignación", onClick = () => getModelObject.quitarAsignacion())
       )
     )
 

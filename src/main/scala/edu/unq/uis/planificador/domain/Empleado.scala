@@ -62,6 +62,13 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
     fireDisponibilidadesChanged()
   }
 
+  def borrarAsignacionConFecha(unaFecha: DateTime) = {
+    (estados de Asignacion).find(_.calendarSpace.esDia(unaFecha)) match {
+      case Some(asignacion) => estados -= asignacion; fireDisponibilidadesChanged()
+      case None =>
+    }
+  }
+
   def disponibleLos(intervals: RecurrentCalendarSpace*) = {
     estados ++= intervals.map {
       it => CalendarElement(Disponible, it)
