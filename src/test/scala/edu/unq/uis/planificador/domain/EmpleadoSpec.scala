@@ -85,7 +85,7 @@ class EmpleadoSpec extends BaseSpec {
   it should "conocer si tiene una asignación para un día" in {
     empleado disponibleLos (Lunes de 9 a 18)
     empleado asignar (Turno el "2014-03-07" de 14 a 16)
-    ((empleado asignacionesPara new DateTime("2014-03-07") ) isEmpty ) should be(false)
+    ((empleado asignacionPara new DateTime("2014-03-07")) isEmpty) should be(false)
 
   }
 }

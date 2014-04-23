@@ -32,21 +32,17 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
     case Left(_) => throw UnexpectedBusinessException("Jerarquía de disponibilidades mal definida")
   }
 
-  def disponibilidadPara(fecha: DateTime, bloque: Int) = {
-    true
-  }
-
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
 
   def restriccionEl(fecha: String) =
     this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(new DateTime(fecha)))
 
-  def asignar(turno: Turno){
-      isDisponibleLos(turno) match {
-        case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
-        case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
-      }
+  def asignar(turno: Turno) {
+    isDisponibleLos(turno) match {
+      case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
+      case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
     }
+  }
 
   def disponibilidades =
     (estados de Disponible)
@@ -77,7 +73,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
     ObservableUtils.firePropertyChanged(this, "disponibilidades", this.disponibilidades)
   }
 
-  def asignacionesPara(fecha: DateTime): Seq[CalendarElement] = {
-    (estados de Asignacion).filter( (c : CalendarElement) => c.calendarSpace.esDia(fecha))
+  def asignacionPara(fecha: DateTime): Option[CalendarElement] = {
+    (estados de Asignacion).find((c: CalendarElement) => c.calendarSpace.esDia(fecha))
   }
 }

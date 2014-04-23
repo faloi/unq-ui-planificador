@@ -6,7 +6,7 @@ import edu.unq.uis.planificador.domain.Planificacion
 import org.uqbar.arena.aop.potm.Function
 import edu.unq.uis.planificador.applicationModel.planificacion.BuscadorPlanificacion
 
-class PlanificacionDeLaSemana (parent: WindowOwner) extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion){
+class PlanificacionDeLaSemana(parent: WindowOwner) extends NiceWindow[BuscadorPlanificacion](parent, new BuscadorPlanificacion) {
   getModelObject.search
 
   override def windowDefinition: Renderizable =
@@ -16,8 +16,8 @@ class PlanificacionDeLaSemana (parent: WindowOwner) extends NiceWindow[BuscadorP
         bindItemsTo = "planificaciones",
         bindSelectionTo = "planificacionSeleccionada",
         height = 600,
-        TableColumn(bindTo = "fecha" ),
-        TableColumn(bindTo = "estado")
+        TableColumn(bindTo = Left("fecha")),
+        TableColumn(bindTo = Left("estado"))
       ),
       LayoutHorizontal(
         Boton(

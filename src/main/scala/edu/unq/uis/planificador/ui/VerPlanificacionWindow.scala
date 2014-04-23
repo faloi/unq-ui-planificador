@@ -12,7 +12,7 @@ class BuscadorPlanificacion(planificacion: Planificacion) {
   var empleadoSeleccionado: Empleado = _
 
   def disponibilidadEmpleadoEnBloque(empleado: Empleado, bloque: Int) = {
-    if (empleado.disponibilidadPara(planificacion.dia, bloque)) "X" else ""
+    if (empleado.asignacionPara(planificacion.fecha).get.incluye(bloque)) "X" else ""
   }
 }
 
@@ -34,7 +34,7 @@ class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
   def columnasDeBloque = (0 until 24).map(columnaParaBloque(_))
 
   def columnaParaBloque(bloque: Int) = TableColumn[Empleado](
-    width = 25,
+    width = 30,
     title = bloque.toString,
     bindTo = Right(
       (empleado: Empleado) => getModelObject.disponibilidadEmpleadoEnBloque(empleado, bloque)
