@@ -7,12 +7,25 @@ import edu.unq.uis.planificador.domain.Empleado
 
 @Observable
 class RestriccionCreator(empleado: Empleado) {
+  var fecha: String = _
 
+  def crear() = {
+    empleado.restriccionEl(fecha)
+  }
 }
 
 class AgregarRestriccionDialog(owner: WindowOwner, empleado: Empleado) extends NiceWindow[RestriccionCreator](owner, new RestriccionCreator(empleado)) {
   override def windowDefinition: Renderizable =
-    LayoutHorizontal(
-      Boton(label = "Aceptar", onClick = () => {})
+    LayoutVertical(
+      LayoutColumn(
+        count = 2,
+
+        Etiqueta(texto = "Fecha"),
+        Input(bindTo = "fecha")
+      ),
+
+      Boton(label = "Aceptar", onClick = () => {
+        getModelObject.crear(); accept()
+      })
     )
 }

@@ -1,13 +1,12 @@
 package edu.unq.uis.planificador.ui.widgets
 
-import org.uqbar.arena.windows.{Dialog, MessageBox, Window, WindowOwner}
+import org.uqbar.arena.windows.{Dialog, Window, WindowOwner}
 import org.uqbar.ui.view.ErrorViewer
-import org.uqbar.arena.widgets.{Label, Selector, Button, Panel}
+import org.uqbar.arena.widgets._
 import org.uqbar.arena.layout.{ColumnLayout, Layout, HorizontalLayout, VerticalLayout}
 import org.uqbar.arena.aop.potm.Function
 import org.uqbar.arena.widgets.tables.{Column, Table}
 import com.uqbar.commons.collections.Transformer
-import edu.unq.uis.planificador.domain.calendar.DiaDeSemana
 import org.uqbar.arena.bindings.{PropertyAdapter, ObservableProperty}
 
 abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](parent, model) with ErrorViewer {
@@ -102,6 +101,13 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](pa
   case class Etiqueta(var texto: String, var width: Int = 100) extends Renderizable {
     override def renderTo(panel: Panel) ={
       new Label(panel).setText(texto).setWidth(width)
+      this
+    }
+  }
+
+  case class Input(bindTo: String, var width: Int = 100) extends Renderizable {
+    override def renderTo(panel: Panel) = {
+      new TextBox(panel).setWidth(width).bindValueToProperty(bindTo)
       this
     }
   }
