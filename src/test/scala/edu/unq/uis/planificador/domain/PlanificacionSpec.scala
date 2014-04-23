@@ -5,10 +5,10 @@ import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
-import edu.unq.uis.planificador.dependencyInjection.TestEnvironment
+import edu.unq.uis.planificador.dependencyInjection.{DevEnvironment, TestEnvironment}
 import org.joda.time.DateTime
 
-class PlanificacionSpec extends BaseSpec with TestEnvironment {
+class PlanificacionSpec extends BaseSpec with DevEnvironment {
   var planificacionVacia: Planificacion = _
   var planificacionConUnempleado: Planificacion = _
 
@@ -20,8 +20,8 @@ class PlanificacionSpec extends BaseSpec with TestEnvironment {
     e disponibleLos (Lunes de 10 a 18)
     e asignar (Turno el "2014-03-07" de 14 a 16)
     this.empleadoHome.create(e)
-    this.planificacionVacia = Planificacion(new DateTime("2014-03-08"), empleadoHome)
-    this.planificacionConUnempleado = Planificacion(new DateTime("2014-03-07"), empleadoHome)
+    this.planificacionVacia = Planificacion(new DateTime("2014-03-08"))
+    this.planificacionConUnempleado = Planificacion(new DateTime("2014-03-07"))
   }
 
   "Una planificacion" should "saber si se planificó para ese día" in {
