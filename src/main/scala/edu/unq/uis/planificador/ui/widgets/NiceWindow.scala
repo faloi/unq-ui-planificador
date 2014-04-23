@@ -1,33 +1,39 @@
 package edu.unq.uis.planificador.ui.widgets
 
-import org.uqbar.arena.windows.{MessageBox, Window, WindowOwner}
+import org.uqbar.arena.windows.{Dialog, MessageBox, Window, WindowOwner}
 import org.uqbar.ui.view.ErrorViewer
-import org.uqbar.arena.widgets.{Button, Panel}
+import org.uqbar.arena.widgets.{Label, Selector, Button, Panel}
 import org.uqbar.arena.layout.{ColumnLayout, Layout, HorizontalLayout, VerticalLayout}
 import org.uqbar.arena.aop.potm.Function
 import org.uqbar.arena.widgets.tables.{Column, Table}
 import com.uqbar.commons.collections.Transformer
+import edu.unq.uis.planificador.domain.calendar.DiaDeSemana
+import org.uqbar.arena.bindings.{PropertyAdapter, ObservableProperty}
 
-abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Window[T](parent, model) with ErrorViewer {
-  def showInfo(message: String) {
-    this.showMessageBox(MessageBox.Type.Information, message)
-  }
+abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](parent, model) with ErrorViewer {
+//  def showInfo(message: String) {
+//    this.showMessageBox(MessageBox.Type.Information, message)
+//  }
+//
+//  def showWarning(message: String) {
+//    this.showMessageBox(MessageBox.Type.Warning, message)
+//  }
+//
+//  def showError(message: String) {
+//    this.showMessageBox(MessageBox.Type.Error, message)
+//  }
+//
+//  protected def showMessageBox(tipo: MessageBox.Type, message: String) {
+//    val messageBox: MessageBox = new MessageBox(this, tipo)
+//    messageBox.setMessage(message)
+//    messageBox.open()
+//  }
 
-  def showWarning(message: String) {
-    this.showMessageBox(MessageBox.Type.Warning, message)
-  }
+//  override def createContents(mainPanel: Panel): Unit = {
+//    this.windowDefinition.renderTo(mainPanel)
+//  }
 
-  def showError(message: String) {
-    this.showMessageBox(MessageBox.Type.Error, message)
-  }
-
-  protected def showMessageBox(tipo: MessageBox.Type, message: String) {
-    val messageBox: MessageBox = new MessageBox(this, tipo)
-    messageBox.setMessage(message)
-    messageBox.open()
-  }
-
-  override def createContents(mainPanel: Panel): Unit = {
+  override def createFormPanel(mainPanel: Panel): Unit = {
     this.windowDefinition.renderTo(mainPanel)
   }
 
@@ -73,6 +79,29 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Window[T](pa
       new Button(panel)
         .setCaption(label)
         .onClick(new Function(onClick))
+      this
+    }
+  }
+
+  case class DropDown[Tipo](bindTo: String, property: String, adapter: PropertyAdapter, width: Int = 250) extends Renderizable {
+    override def renderTo(panel: Panel) = {
+      val selector = new Selector[Tipo](panel)
+      selector
+        .allowNull(false)
+        .setWidth(width)
+        .bindValueToProperty(bindTo)
+
+      selector
+        .bindItems(new ObservableProperty(property))
+        .setAdapter(adapter)
+
+      this
+    }
+  }
+
+  case class Etiqueta(var texto: String, var width: Int = 100) extends Renderizable {
+    override def renderTo(panel: Panel) ={
+      new Label(panel).setText(texto).setWidth(width)
       this
     }
   }

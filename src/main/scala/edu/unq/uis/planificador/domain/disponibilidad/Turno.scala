@@ -8,4 +8,5 @@ case class Turno(fecha: DateTime, horario: Interval) extends UbicableEnDia {
 
 object Turno {
   def el(fecha: String): TurnoBuilder = new TurnoBuilder(new DateTime(fecha))
+  def el(fecha: DateTime): TurnoBuilder = new TurnoBuilder(fecha)
 }

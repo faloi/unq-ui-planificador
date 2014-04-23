@@ -12,8 +12,6 @@ class MainMenu(parent: WindowOwner) extends NiceWindow[DummyModel](parent, new D
 
   override def windowDefinition: Renderizable =
 
-    LayoutVertical(
-
       LayoutVertical(
         Boton(
           label = "Buscar Empleado",
@@ -24,7 +22,6 @@ class MainMenu(parent: WindowOwner) extends NiceWindow[DummyModel](parent, new D
           onClick = () => openNew(new PlanificacionDeLaSemana(this))
         )
       )
-    )
 
 }
 

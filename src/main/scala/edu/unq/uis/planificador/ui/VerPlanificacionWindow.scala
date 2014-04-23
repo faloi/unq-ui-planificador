@@ -1,10 +1,11 @@
 package edu.unq.uis.planificador.ui
 
-import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.arena.windows.{Dialog, WindowOwner}
 import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import edu.unq.uis.planificador.domain.{Empleado, Planificacion}
 import org.uqbar.commons.utils.Observable
 import ArenaScalaExtensions._
+import edu.unq.uis.planificador.ui.empleado.CrearAsignacion
 
 @Observable
 class BuscadorPlanificacion(planificacion: Planificacion) {
@@ -40,7 +41,7 @@ class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
       ),
 
       LayoutHorizontal(
-        Boton(label = "Agregar asignación", onClick = () => {}),
+        Boton(label = "Agregar asignación", onClick = () => openDialog (new CrearAsignacion(this, planificacion))),
         Boton(label = "Quitar asignación", onClick = () => getModelObject.quitarAsignacion())
       )
     )
@@ -56,4 +57,9 @@ class VerPlanificacionWindow(parent: WindowOwner, planificacion: Planificacion)
       (empleado: Empleado) => getModelObject.disponibilidadEmpleadoEnBloque(empleado, bloque)
     )
   )
+
+  def openDialog( d:Dialog[_]){
+    d.onAccept(() => getModelObject.search())
+    d.open()
+  }
 }
