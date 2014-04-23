@@ -9,6 +9,7 @@ import org.uqbar.arena.widgets.tables.{Column, Table}
 import com.uqbar.commons.collections.Transformer
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana
 import org.uqbar.arena.bindings.{PropertyAdapter, ObservableProperty}
+import org.uqbar.lacar.ui.model.Action
 
 abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](parent, model) with ErrorViewer {
 //  def showInfo(message: String) {
@@ -79,11 +80,12 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](pa
       new Button(panel)
         .setCaption(label)
         .onClick(new Function(onClick))
+        .disableOnError()
       this
     }
   }
 
-  case class DropDown[Tipo](bindTo: String, property: String, adapter: PropertyAdapter, width: Int = 250) extends Renderizable {
+  case class DropDown[Tipo](bindTo: String, property: String, adapter: PropertyAdapter, width: Int = 250, onSelection: () => Unit = ()=>false) extends Renderizable {
     override def renderTo(panel: Panel) = {
       val selector = new Selector[Tipo](panel)
       selector
@@ -94,7 +96,9 @@ abstract class NiceWindow[T](parent: WindowOwner, model: T) extends Dialog[T](pa
       selector
         .bindItems(new ObservableProperty(property))
         .setAdapter(adapter)
-
+      selector.onSelection(new Action(){
+        override def execute(): Unit = onSelection()
+      })
       this
     }
   }

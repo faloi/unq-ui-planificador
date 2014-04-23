@@ -18,7 +18,7 @@ object PlanificadorApplication extends Application with App with DevEnvironment 
     val pedro = new Empleado("Pedro", "Picapiedras", "123134")
     pedro disponibleLos (Lunes de 14 a 19)
     pedro disponibleLos (Martes de 16 a 20)
-    pedro asignar (Turno el "2014-04-21" de 14 a 16)
+    pedro asignar (Turno el "2014-04-21" de 14 a 18)
     empleadoHome.create(pedro)
 
     val juana = new Empleado("juana", "Picapiedras", "8795468")
