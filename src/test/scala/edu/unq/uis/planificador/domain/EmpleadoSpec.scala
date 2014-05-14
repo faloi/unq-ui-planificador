@@ -5,8 +5,8 @@ import RecurrentCalendarSpaceBuilder._
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.BaseSpec
 import edu.unq.uis.planificador.domain.calendar.DiaDeSemana._
-import edu.unq.uis.planificador.exceptions.PlanificadorBusinessException
 import org.joda.time.DateTime
+import org.uqbar.commons.model.UserException
 
 class EmpleadoSpec extends BaseSpec {
 
@@ -44,7 +44,7 @@ class EmpleadoSpec extends BaseSpec {
 
   it should "lanzar BussinessException si se intenta asignar un turno a un día con restricción" in {
     empleado restriccionEl "2014-03-24"
-    intercept[PlanificadorBusinessException]{
+    intercept[UserException]{
       empleado asignar (Turno el "2014-03-24" de 12 a 16)
     }
   }

@@ -3,14 +3,13 @@ package edu.unq.uis.planificador.domain
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.domain.calendar._
 import com.github.nscala_time.time.Imports._
-import org.uqbar.commons.model.{ObservableUtils, Entity}
+import org.uqbar.commons.model.{UserException, ObservableUtils, Entity}
 import org.uqbar.commons.utils.Observable
 import edu.unq.uis.planificador.domain.patterns.Chain
 import Chain._
 import edu.unq.uis.planificador.domain.calendar.CalendarSpace
 import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
 import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
-import edu.unq.uis.planificador.exceptions.{PlanificadorBusinessException, UnexpectedBusinessException}
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
@@ -29,7 +28,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def disponibilidadPara(turno: Turno): CalendarElement = jerarquiaDeDisponibilidades(turno) match {
     case Right(x) => x
-    case Left(_) => throw UnexpectedBusinessException("Jerarquía de disponibilidades mal definida")
+    case Left(_) => throw new UserException("Jerarquía de disponibilidades mal definida")
   }
 
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
@@ -39,7 +38,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def asignar(turno: Turno) {
     isDisponibleLos(turno) match {
-      case Restriccion => throw PlanificadorBusinessException("No puede asignarse un turno para un día con restricción")
+      case Restriccion => throw new UserException("No puede asignarse un turno para un día con restricción")
       case _ => this.estados += CalendarElement(Asignacion, new CalendarSpace(turno.fecha, turno.horario))
     }
   }

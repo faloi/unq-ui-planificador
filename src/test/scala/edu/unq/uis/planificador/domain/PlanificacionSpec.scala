@@ -19,7 +19,7 @@ class PlanificacionSpec extends BaseSpec with DevEnvironment {
 //    this.empleadoHome
     juan disponibleLos (Jueves de 10 a 18)
     juan disponibleLos (Lunes de 10 a 18)
-    juan asignar (Turno el "2014-03-07" de 14 a 16)
+    juan asignar (Turno el "2014-03-07" de 14 a 18)
     this.empleadoHome.create(juan)
     this.planificacionVacia = Planificacion(new DateTime("2014-03-08"))
     this.planificacionConUnempleado = Planificacion(new DateTime("2014-03-07"))
@@ -31,6 +31,6 @@ class PlanificacionSpec extends BaseSpec with DevEnvironment {
   }
 
   it should "poder darme la disponibilidad de un empleado" in {
-    planificacionConUnempleado.asignacionDe(juan) should be(Turno el "2014-03-07" de 14 a 16)
+    planificacionConUnempleado.asignacionDe(juan).calendarSpace.entrada should be(14)
   }
 }
