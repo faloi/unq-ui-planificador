@@ -13,8 +13,8 @@ import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
-  val estados: DisponibilidadContainer = new DisponibilidadContainer
-
+  @transient val estados: DisponibilidadContainer = new DisponibilidadContainer
+  def this() = this(null,null,null)
   val chain =
     (input: Seq[CalendarElement]) =>
       (turno: Turno) =>

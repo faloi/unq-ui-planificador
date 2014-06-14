@@ -4,7 +4,7 @@ import scala.collection.mutable
 import edu.unq.uis.planificador.domain.calendar.{DiaDeSemana, RecurrentCalendarSpace, CalendarElement}
 import org.joda.time.DateTime
 
-class DisponibilidadContainer {
+class DisponibilidadContainer extends Serializable {
 
   implicit class EnhancedMap[A, B, C](m: mutable.Map[(A, B), C]) {
     def update(a: A, b: B, c: C) {

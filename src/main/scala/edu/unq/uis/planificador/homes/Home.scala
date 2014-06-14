@@ -1,5 +1,5 @@
 package edu.unq.uis.planificador.homes
 
-trait Home[T] {
-  def findAll() : Seq[T]
-}
+import org.uqbar.commons.model.Entity
+
+trait Home[T <:Entity] extends org.uqbar.commons.model.Home[T]
