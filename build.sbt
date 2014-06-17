@@ -4,7 +4,7 @@ name := """planificador-domain"""
 
 version := "1.0"
 
-scalaVersion := "2.11.0"
+scalaVersion := "2.10.2"
 
 resolvers += "Local Maven Repository" at Path.userHome.asFile.toURI.toURL + "/.m2/repository"
 
@@ -16,7 +16,7 @@ resolvers += "SWT repo" at "http://swt-maven.googlecode.com/git-history/master/"
 
 resolvers += "swt-repo" at "https://swt-repo.googlecode.com/svn/repo/"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.5" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "1.9.1" % "test"
 
 libraryDependencies += "org.uqbar-project" % "arena-jface" % "3.4-SNAPSHOT"
 
