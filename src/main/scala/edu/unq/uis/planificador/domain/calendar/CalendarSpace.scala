@@ -1,10 +1,9 @@
 package edu.unq.uis.planificador.domain.calendar
 
-import edu.unq.uis.planificador.domain.disponibilidad.UbicableEnDia
-import com.github.nscala_time.time.TypeImports.DateTime
-import com.github.nscala_time.time.TypeImports.Interval
-import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
 import com.github.nscala_time.time.Imports
+import com.github.nscala_time.time.TypeImports.{DateTime, Interval}
+import edu.unq.uis.planificador.domain.disponibilidad.UbicableEnDia
+import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
 import org.uqbar.commons.model.UserException
 import org.uqbar.commons.utils.Observable
 
@@ -24,10 +23,12 @@ object TrivialCalendarSpace extends UbicableEnDia with ConRangoHorario with Full
 
 @Observable
 case class RecurrentCalendarSpace(var inicio: Int = 9, var fin: Int = 18, var diaDeSemana: DiaDeSemana = DiaDeSemana.Lunes)
-extends UbicableEnDia with ConRangoHorario {
+  extends UbicableEnDia with ConRangoHorario with Serializable {
+
+  def this() = this(9, 18, DiaDeSemana.Lunes)
 
   validar()
-  val rango :Interval = TimeInterval.create(inicio, fin)
+  @transient val rango: Interval = TimeInterval.create(inicio, fin)
 
   override def esDia(dia: DateTime): Boolean = dia.getDayOfWeek == diaDeSemana.value
 

@@ -15,7 +15,7 @@ trait Enum[A] {
   def values = _values
 }
 
-sealed trait DiaDeSemana extends DiaDeSemana.Value with Ordered[DiaDeSemana] {
+sealed trait DiaDeSemana extends DiaDeSemana.Value with Ordered[DiaDeSemana] with Serializable {
   def value: Int
 
   def nombre = this.getClass.getSimpleName.replace("$", "")
