@@ -1,16 +1,26 @@
 package edu.unq.uis.planificador.domain
 
-import org.joda.time.DateTime
-import scala.collection.JavaConverters._
-import org.uqbar.commons.model.{ObservableUtils, Entity}
 import edu.unq.uis.planificador.dependencyInjection.DevEnvironment
+import org.joda.time.DateTime
+import org.uqbar.commons.model.{Entity, ObservableUtils}
 import org.uqbar.commons.utils.Observable
+
+import scala.collection.JavaConverters._
+
+case class TurnoEmpleado(nombre: String, inicio: Int, fin: Int) {
+  def this() = this(null, null, null)
+}
 
 @Observable
 case class Planificacion(fecha: DateTime) extends Entity with DevEnvironment {
   def asignacionDe(unEmpleado: Empleado) = {
     unEmpleado.asignacionPara(fecha).get
   }
+
+  def turnos = empleados.map(it => {
+    val asignacion = asignacionDe(it).calendarSpace
+    TurnoEmpleado(it.nombreCompleto, asignacion.entrada, asignacion.salida)
+  })
 
   def empleados: Seq[Empleado] = empleadoHome
     .allInstances()
