@@ -6,14 +6,15 @@ import org.uqbar.commons.model.{Entity, ObservableUtils}
 import org.uqbar.commons.utils.Observable
 
 import scala.collection.JavaConverters._
+import java.util
 
 case class TurnoEmpleado(nombre: String, inicio: Int, fin: Int) extends Serializable {
   def this() = this("", 0, 0)
 
-  def horarios: List[Boolean] =
-    List.range(0,inicio).map( e => false) ++
-    List.range(inicio,fin).map(_ => true) ++
-    List.range(fin, 24).map(_ => false)
+  def horarios: util.List[String] =
+    (List.range(0,inicio).map( _ => "") ++
+    List.range(inicio,fin).map(_ => "X") ++
+    List.range(fin, 24).map(_ => "")).asJava
 }
 
 @Observable
