@@ -1,15 +1,12 @@
 package edu.unq.uis.planificador.domain
 
-import edu.unq.uis.planificador.domain.disponibilidad._
-import edu.unq.uis.planificador.domain.calendar._
 import com.github.nscala_time.time.Imports._
-import org.uqbar.commons.model.{UserException, ObservableUtils, Entity}
-import org.uqbar.commons.utils.Observable
+import edu.unq.uis.planificador.domain.calendar.{AllDayCalendarSpace, CalendarSpace, RecurrentCalendarSpace, _}
+import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.domain.patterns.Chain
-import Chain._
-import edu.unq.uis.planificador.domain.calendar.CalendarSpace
-import edu.unq.uis.planificador.domain.calendar.AllDayCalendarSpace
-import edu.unq.uis.planificador.domain.calendar.RecurrentCalendarSpace
+import edu.unq.uis.planificador.domain.patterns.Chain._
+import org.uqbar.commons.model.{Entity, ObservableUtils, UserException}
+import org.uqbar.commons.utils.Observable
 
 @Observable
 class Empleado(var nombre: String = null, var apellido: String = null, var legajo: String = null) extends Entity {
@@ -64,7 +61,7 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
   }
 
   def borrarDisponibilidad(unaDisponibilidad: RecurrentCalendarSpace) = {
-    estados -= unaDisponibilidad
+    estados -= disponibilidades.find(_.diaDeSemana == unaDisponibilidad.diaDeSemana).get
     fireDisponibilidadesChanged()
   }
 
