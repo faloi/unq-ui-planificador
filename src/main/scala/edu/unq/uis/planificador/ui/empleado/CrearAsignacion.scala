@@ -1,24 +1,23 @@
 package edu.unq.uis.planificador.ui.empleado
 
-import org.uqbar.arena.windows.WindowOwner
-import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import edu.unq.uis.planificador.applicationModel.empleado.BuscadorEmpleados
-import edu.unq.uis.planificador.domain.Empleado
-import edu.unq.uis.planificador.ui.ArenaScalaExtensions
-import ArenaScalaExtensions._
+import edu.unq.uis.planificador.domain.{Empleado, Planificacion}
 import edu.unq.uis.planificador.domain.disponibilidad._
-import org.uqbar.commons.utils.Observable
-import org.uqbar.arena.bindings.PropertyAdapter
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.DateTime
-import edu.unq.uis.planificador.domain.Planificacion
 import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
+import edu.unq.uis.planificador.ui.ArenaScalaExtensions
+import edu.unq.uis.planificador.ui.ArenaScalaExtensions._
+import edu.unq.uis.planificador.ui.widgets.NiceWindow
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.uqbar.arena.bindings.PropertyAdapter
+import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.commons.utils.Observable
 
 @Observable
 class NuevaAsignacionModel{
   val buscador: BuscadorEmpleados = new BuscadorEmpleados
   val turnos: Seq[Hora] = (0 until 24).map( (i:Int) => new Hora(i))
-  var ini: Hora = new Hora(0)
+  var inicio: Hora = new Hora(0)
   var fin: Hora = new Hora(0)
   var fecha : DateTime = _
 
@@ -30,8 +29,8 @@ class NuevaAsignacionModel{
     this.buscador.search
     this.buscador.empleados = buscador.empleados.sortWith(
       (e1: Empleado, e2: Empleado) => (
-        e1.disponibilidadPara(Turno el fecha de ini.num a fin.num).disponibilidad,
-        e2.disponibilidadPara(Turno el fecha de ini.num a fin.num).disponibilidad
+        e1.disponibilidadPara(Turno el fecha de inicio.num a fin.num).disponibilidad,
+        e2.disponibilidadPara(Turno el fecha de inicio.num a fin.num).disponibilidad
       ) match {
         case (Disponible, _) => true
         case (_, Disponible) => false
@@ -66,7 +65,7 @@ class CrearAsignacion (parent: WindowOwner,planificacion: Planificacion ) extend
       LayoutHorizontal(
         Etiqueta("Desde:"),
         DropDown[NuevaAsignacionModel](
-            bindTo = "ini",
+          bindTo = "inicio",
             property = "turnos",
             adapter = new PropertyAdapter(classOf[Hora], "readable")
         ),
@@ -87,14 +86,14 @@ class CrearAsignacion (parent: WindowOwner,planificacion: Planificacion ) extend
           height = 400,
               TableColumn(width = 80, bindTo = Left("nombre") ),
               TableColumn(width = 80, bindTo = Right((e:Empleado) =>
-                e.disponibilidadPara ( new Turno(planificacion.fecha, TimeInterval.create(getModelObject.ini.num, getModelObject.ini.num))).disponibilidad.razon)
+                e.disponibilidadPara(new Turno(planificacion.fecha, TimeInterval.create(getModelObject.inicio.num, getModelObject.inicio.num))).disponibilidad.razon)
         )
       ),
       Boton(
         label = "Asignar",
         onClick = () => {
           getModelObject.buscador.empleadoSeleccionado.asignar(
-            Turno el planificacion.fecha de getModelObject.ini.num a getModelObject.fin.num)
+            Turno el planificacion.fecha de getModelObject.inicio.num a getModelObject.fin.num)
           this.accept()
         }
       )
