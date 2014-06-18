@@ -7,7 +7,7 @@ import edu.unq.uis.planificador.domain.{Planificacion, Empleado}
 import org.joda.time.{DateTimeConstants, LocalDate}
 
 @Observable
-class BuscadorPlanificacion extends DevEnvironment {
+case class BuscadorPlanificacion() extends DevEnvironment {
   var planificaciones: Seq[Planificacion] = _
   var planificacionSeleccionada: Planificacion = _
 

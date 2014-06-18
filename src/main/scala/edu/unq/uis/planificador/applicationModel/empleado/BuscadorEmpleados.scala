@@ -6,7 +6,7 @@ import scala.collection.JavaConversions._
 import edu.unq.uis.planificador.domain.Empleado
 
 @Observable
-class BuscadorEmpleados extends DevEnvironment {
+case class BuscadorEmpleados() extends DevEnvironment with Serializable{
   var empleados: Seq[Empleado] = _
   var empleadoSeleccionado: Empleado = _
 

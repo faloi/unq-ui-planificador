@@ -8,7 +8,7 @@ import org.uqbar.commons.utils.Observable
 import scala.collection.JavaConverters._
 
 case class TurnoEmpleado(nombre: String, inicio: Int, fin: Int) {
-  def this() = this(null, null, null)
+  def this() = this("", 0, 0)
 }
 
 @Observable
