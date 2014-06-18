@@ -7,7 +7,7 @@ import org.uqbar.commons.utils.Observable
 
 import scala.collection.JavaConverters._
 
-case class TurnoEmpleado(nombre: String, inicio: Int, fin: Int) {
+case class TurnoEmpleado(nombre: String, inicio: Int, fin: Int) extends Serializable {
   def this() = this("", 0, 0)
 }
 
