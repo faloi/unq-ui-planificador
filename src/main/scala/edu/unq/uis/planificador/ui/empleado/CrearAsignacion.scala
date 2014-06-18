@@ -1,10 +1,9 @@
 package edu.unq.uis.planificador.ui.empleado
 
 import edu.unq.uis.planificador.applicationModel.empleado.BuscadorEmpleados
-import edu.unq.uis.planificador.domain.{Empleado, Planificacion}
 import edu.unq.uis.planificador.domain.disponibilidad._
 import edu.unq.uis.planificador.domain.timeHelpers.TimeInterval
-import edu.unq.uis.planificador.ui.ArenaScalaExtensions
+import edu.unq.uis.planificador.domain.{Empleado, Planificacion}
 import edu.unq.uis.planificador.ui.ArenaScalaExtensions._
 import edu.unq.uis.planificador.ui.widgets.NiceWindow
 import org.joda.time.DateTime
@@ -14,7 +13,7 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.commons.utils.Observable
 
 @Observable
-class NuevaAsignacionModel{
+class NuevaAsignacionModel extends Serializable {
   val buscador: BuscadorEmpleados = new BuscadorEmpleados
   val turnos: Seq[Hora] = (0 until 24).map( (i:Int) => new Hora(i))
   var inicio: Hora = new Hora(0)
