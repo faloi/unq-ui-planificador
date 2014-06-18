@@ -1,9 +1,8 @@
 package edu.unq.uis.planificador.domain
 
 import com.github.nscala_time.time.Imports._
-import edu.unq.uis.planificador.domain.calendar.{AllDayCalendarSpace, CalendarSpace, RecurrentCalendarSpace, _}
+import edu.unq.uis.planificador.domain.calendar._
 import edu.unq.uis.planificador.domain.disponibilidad._
-import edu.unq.uis.planificador.domain.patterns.Chain
 import edu.unq.uis.planificador.domain.patterns.Chain._
 import org.uqbar.commons.model.{Entity, ObservableUtils, UserException}
 import org.uqbar.commons.utils.Observable
@@ -30,8 +29,10 @@ class Empleado(var nombre: String = null, var apellido: String = null, var legaj
 
   def isDisponibleLos(turno: Turno): Disponibilidad = disponibilidadPara(turno).disponibilidad
 
-  def restriccionEl(fecha: String) =
-    this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(new DateTime(fecha)))
+  def restriccionEl(fecha: String): Unit = restriccionEl(new DateTime(fecha))
+
+  def restriccionEl(fecha: DateTime): Unit =
+    this.estados += CalendarElement(Restriccion, AllDayCalendarSpace(fecha))
 
   def asignar(turno: Turno) {
     isDisponibleLos(turno) match {
